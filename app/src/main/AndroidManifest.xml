@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
         <activity
+            android:name=".historico"
+            android:exported="false" />
+        <activity
             android:name=".MarketplaceActivity"
             android:exported="false" />
         <activity
