@@ -6,50 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".MarketplaceActivity">
 
+    <Spinner
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="Desplegar categorías de producto"
+        android:id="@+id/spnCategory"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/parentRVProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnCategory" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnShowMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="#D8D7D7"
+        android:contentDescription="Mostrar acciones"
         android:src="@drawable/ic_more"
         android:tint="@color/white"
-        android:backgroundTint="#D8D7D7"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Mostrar acciones"
-        android:id="@+id/btnShowMore"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCheckout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
+        android:contentDescription="Añadir producto"
         android:src="@drawable/ic_checkout"
         app:layout_constraintBottom_toTopOf="@+id/btnShowMore"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Añadir producto"
-        android:id="@+id/btnAddToCart"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSetBudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_budget"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddToCart"
-        app:layout_constraintEnd_toEndOf="@+id/btnAddToCart"
         android:contentDescription="Asignar presupuesto"
-        android:id="@+id/btnSetBudget"/>
+        android:src="@drawable/ic_budget"
+        app:layout_constraintBottom_toTopOf="@+id/btnCheckout"
+        app:layout_constraintEnd_toEndOf="@+id/btnCheckout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnScanCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
+        android:contentDescription="Escanear código"
         android:src="@drawable/ic_barcode"
         app:layout_constraintBottom_toTopOf="@+id/btnSetBudget"
-        app:layout_constraintEnd_toEndOf="@+id/btnSetBudget"
-        android:contentDescription="Escanear código"
-        android:id="@+id/btnScanCode"/>
+        app:layout_constraintEnd_toEndOf="@+id/btnSetBudget" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

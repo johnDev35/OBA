@@ -9,8 +9,11 @@
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/drawable/ic_more.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/activity_marketplace.xml" value="0.1" />
+        <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/activity_marketplace.xml" value="0.33" />
+        <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/category_spinner_marketplace.xml" value="0.33" />
+        <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/child_rv_item_marketplace.xml" value="0.25" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/marketplace.xml" value="0.25" />
+        <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/parent_rv_item_marketplace.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/menu/menu_marketplace.xml" value="0.20416666666666666" />
       </map>
     </option>
