@@ -25,18 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, "Clicked button", Toast.LENGTH_SHORT).show();
     }
 
+    public void marketPlace(View v){
 
-    /*
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.btnMarketplace:
-                Intent intMarketplace = new Intent(this, MarketplaceActivity.class);
-                startActivity(intMarketplace);
-                break;
-            default:
-                break;
-        }
-    }*/
+        Intent siguiente = new Intent(this,MarketplaceActivity.class);
+        startActivity(siguiente);
+    }
 }
