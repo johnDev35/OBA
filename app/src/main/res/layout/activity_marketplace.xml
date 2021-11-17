@@ -6,29 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MarketplaceActivity">
 
-    <Spinner
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="Desplegar categorías de producto"
-        android:id="@+id/spnCategory"/>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/parentRVProduct"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewMarketPlace"
+        android:name="com.edu.unab.oba.FragmentProducts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnCategory" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnShowMore"
@@ -54,6 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnShowMore"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnSetBudget"
         android:layout_width="wrap_content"
@@ -74,5 +60,18 @@
         app:layout_constraintBottom_toTopOf="@+id/btnSetBudget"
         app:layout_constraintEnd_toEndOf="@+id/btnSetBudget" />
 
+    <TextView
+        android:id="@+id/cart_badge"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/badge_background"
+        android:padding="3dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnCheckout"
+        app:layout_constraintTop_toTopOf="@+id/btnCheckout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

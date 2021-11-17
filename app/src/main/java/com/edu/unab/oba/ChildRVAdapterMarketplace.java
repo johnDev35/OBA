@@ -49,6 +49,9 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
         holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(context instanceof MarketplaceActivity) {
+                    ((MarketplaceActivity) context).addToCart(currentItem);
+                }
                 Toast.makeText(context,  currentItem.getMarca() + " " + currentItem.getNombre() + " seleccionado", Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentBudget">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="40dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+
+                android:contentDescription="Imagen de ambientación"
+                android:src="@drawable/budget"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:inputType="number"
+                android:layout_marginStart="10dp"
+                android:text="Su presupuesto"
+                app:layout_constraintTop_toBottomOf="@+id/imgBudget" />
+
+            <EditText
+                android:id="@+id/edTxtBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Indique su presupuesto"
+                android:layout_marginEnd="10dp"
+                android:textAlignment="textEnd"
+                app:layout_constraintTop_toBottomOf="@+id/txtBudget"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/txtSpend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:text="Su gasto hasta ahora"
+                app:layout_constraintTop_toBottomOf="@id/edTxtBudget"
+
+                />
+
+            <EditText
+                android:id="@+id/edTxtSpend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="$000.000,0"
+                android:layout_marginEnd="10dp"
+                android:textAlignment="textEnd"
+                app:layout_constraintTop_toBottomOf="@id/txtSpend" />
+
+            <TextView
+                android:id="@+id/txtBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:text="El saldo que le queda"
+                app:layout_constraintTop_toBottomOf="@id/edTxtSpend" />
+
+            <EditText
+                android:id="@+id/edTxtBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:enabled="false"
+                android:hint="$0,0"
+                android:layout_marginEnd="10dp"
+                android:textAlignment="textEnd"
+                app:layout_constraintTop_toBottomOf="@id/txtBalance" />
+
+            <Button
+                android:id="@+id/btnCancelEditBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnOkEditBudget"
+                app:layout_constraintTop_toBottomOf="@id/edTxtBalance"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnOkEditBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Aceptar"
+                app:layout_constraintEnd_toStartOf="@+id/btnCancelEditBudget"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnCancelEditBudget" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

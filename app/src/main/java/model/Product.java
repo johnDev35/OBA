@@ -1,6 +1,10 @@
 package model;
 
-public class Product {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Product  implements Parcelable {
+
     private String marca;
     private String nombre;
     private int precio;
@@ -10,6 +14,50 @@ public class Product {
     private String codigo;
     private String formato;
     private int imagen;
+
+
+    protected Product(Parcel in) {
+        marca = in.readString();
+        nombre = in.readString();
+        precio = in.readInt();
+        categoria = in.readString();
+        undMedida = in.readString();
+        ubicacion = in.readString();
+        codigo = in.readString();
+        formato = in.readString();
+        imagen = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(marca);
+        dest.writeString(nombre);
+        dest.writeInt(precio);
+        dest.writeString(categoria);
+        dest.writeString(undMedida);
+        dest.writeString(ubicacion);
+        dest.writeString(codigo);
+        dest.writeString(formato);
+        dest.writeInt(imagen);
+    }
+
 
     public Product(String marca, String nombre, int precio, String categoria, String undMedida, String ubicacion, String codigo, String formato, int imagen) {
         this.marca = marca;

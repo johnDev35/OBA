@@ -1,33 +1,30 @@
 package com.edu.unab.oba;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import model.Brand;
-import model.Category;
+import model.Cart;
+import model.Product;
 
-public class MarketplaceActivity extends AppCompatActivity {
+public class MarketplaceActivity extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton btnShowMore, btnAddToCart, btnSetBudget, btnScanCode;
     Boolean showMoreIsEnabled;
-    Spinner spnCategory;
-    ArrayList <Brand> brands = new ArrayList<>();
-    ArrayList<Category> categories = new ArrayList<>();
+    ArrayList<Cart> cartProducts = new ArrayList<>();
 
-    RecyclerView parentRVMarketplace;
-    RecyclerView.LayoutManager parentLayoutManager;
+    int numItems;
+    TextView txtCartItems, txtCartItemsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,60 +32,15 @@ public class MarketplaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_marketplace);
 
         // Regresar al inicio
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Número de elementos en el carro de compras
+        numItems = 0;
 
-        //TODO Crear marcas de productos
+        txtCartItems = findViewById(R.id.cart_badge);
+        updateBadge(txtCartItems);
 
-        brands.add(new Brand("Colombina"));
-        brands.add(new Brand("Bianchi"));
-        brands.add(new Brand("Fruticas"));
-        brands.add(new Brand("Barrilete"));
-
-        // Recycler View
-        parentRVMarketplace = findViewById(R.id.parentRVProduct);
-        // Adaptador
-        ParentRVAdapterMarketplace parentRVAdapterMarketplace = new ParentRVAdapterMarketplace(this);
-        parentRVAdapterMarketplace.setBrands(brands);
-
-        // Layout
-        parentLayoutManager = new LinearLayoutManager(this);
-        parentRVMarketplace.setAdapter(parentRVAdapterMarketplace);
-        parentRVMarketplace.setLayoutManager(parentLayoutManager);
-
-        // Spinner
-
-        spnCategory = findViewById(R.id.spnCategory);
-
-
-        //TODO lista de categorías de productos
-
-        categories.add(new Category("Caramelos",R.drawable.category_candy));
-        categories.add(new Category("Barras de cereal", R.drawable.category_candy));
-        categories.add(new Category("Chocolates", R.drawable.category_candy));
-        categories.add(new Category("Dulces duros", R.drawable.category_candy));
-        categories.add(new Category("Bombones", R.drawable.category_lollipop));
-
-        SpinnerAdapterMarketplace spinnerAdapterMarketplace;
-        spinnerAdapterMarketplace = new SpinnerAdapterMarketplace(this, categories);
-        spnCategory.setAdapter(spinnerAdapterMarketplace);
-
-        spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Category selectedCategory = (Category) parent.getItemAtPosition(position);
-                Toast.makeText(MarketplaceActivity.this, selectedCategory.getCategory() + " selected" , Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-        // Botones flotantes
+        // BOTONES FLOTANTES
         btnShowMore = findViewById(R.id.btnShowMore);
         btnAddToCart = findViewById(R.id.btnCheckout);
         btnSetBudget = findViewById(R.id.btnSetBudget);
@@ -97,30 +49,124 @@ public class MarketplaceActivity extends AppCompatActivity {
         btnSetBudget.setVisibility(View.GONE);
         btnScanCode.setVisibility(View.GONE);
 
+        // Variable para mostrar/ocultar botones flotantes
         showMoreIsEnabled = false;
+        btnShowMore.setOnClickListener(this);
 
-        btnShowMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(!showMoreIsEnabled){
-                    btnAddToCart.setVisibility(View.VISIBLE);
-                    btnSetBudget.setVisibility(View.VISIBLE);
-                    btnScanCode.setVisibility(View.VISIBLE);
-                } else{
-                    btnAddToCart.setVisibility(View.GONE);
-                    btnSetBudget.setVisibility(View.GONE);
-                    btnScanCode.setVisibility(View.GONE);
-                }
-                showMoreIsEnabled = !showMoreIsEnabled;
-            }
-        });
+        btnSetBudget.setOnClickListener(this);
+        btnAddToCart.setOnClickListener(this);
+        btnScanCode.setOnClickListener(this);
     }
 
+    // MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_marketplace, menu);
+
+        // Adicionar badge de conteo para productos en el menú para el carro de compras
+        final MenuItem itmCart;
+        itmCart = menu.findItem(R.id.checkout);
+        View actionView = itmCart.getActionView();
+        txtCartItemsMenu = (TextView) actionView.findViewById(R.id.cart_badge_menu);
+        updateBadge(txtCartItemsMenu);
+
         return true;
     }
+
+    private void changeButtonVisibility(){
+        if (!showMoreIsEnabled) {
+            btnAddToCart.setVisibility(View.VISIBLE);
+            btnSetBudget.setVisibility(View.VISIBLE);
+            btnScanCode.setVisibility(View.VISIBLE);
+        } else {
+            btnAddToCart.setVisibility(View.GONE);
+            btnSetBudget.setVisibility(View.GONE);
+            btnScanCode.setVisibility(View.GONE);
+        }
+        showMoreIsEnabled = !showMoreIsEnabled;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnShowMore:
+                changeButtonVisibility();
+                break;
+            case R.id.btnSetBudget:
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerViewMarketPlace, FragmentBudget.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("products")
+                        .commit();
+                changeButtonVisibility();
+                break;
+            case R.id.btnCheckout:
+                Bundle bundleCheckout = new Bundle();
+                bundleCheckout.putParcelableArrayList("checkout", cartProducts);
+                FragmentCart fragmentCart = new FragmentCart();
+                fragmentCart.setArguments(bundleCheckout);
+
+                FragmentManager fragmentManagerCheckout = getSupportFragmentManager();
+                fragmentManagerCheckout.beginTransaction()
+                        .replace(R.id.fragmentContainerViewMarketPlace, fragmentCart)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("cart")
+                        .commit();
+                changeButtonVisibility();
+                break;
+            case R.id.btnScanCode:
+                FragmentManager fragmentManagerScanCode = getSupportFragmentManager();
+                fragmentManagerScanCode.beginTransaction()
+                        .replace(R.id.fragmentContainerViewMarketPlace, FragmentScanBarCode.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("scanner")
+                        .commit();
+                changeButtonVisibility();
+            default:
+                break;
+        }
+    }
+
+    private void updateBadge(TextView txtUpdateBadge) {
+        if (txtUpdateBadge != null) {
+            if (numItems == 0) {
+                if (txtUpdateBadge.getVisibility() != View.GONE) {
+                    txtUpdateBadge.setVisibility(View.GONE);
+                }
+            } else {
+                txtUpdateBadge.setText(String.valueOf(Math.min(numItems, 99)));
+                if (txtUpdateBadge.getVisibility() != View.VISIBLE) {
+                    txtUpdateBadge.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+    }
+
+    public void addToCart(Product producto) {
+        numItems += 1;
+        updateBadge(txtCartItems);
+        updateBadge(txtCartItemsMenu);
+
+
+        //Buscar si el producto está en el carro de compras si está suma uno a la cantidad
+        // de lo contrario lo añade a la lista
+        boolean inCart = false;
+        for (Cart cartProduct : cartProducts) {
+            if (cartProduct.getProducto().getNombre().equals(producto.getNombre())) {
+                cartProduct.setCantidad(cartProduct.getCantidad() + 1);
+                cartProduct.setValorItem(cartProduct.getProducto().getPrecio() * cartProduct.getCantidad());
+                inCart = true;
+                break;
+            }
+        }
+
+        if (!inCart) {
+            Cart newProduct = new Cart(producto, 1, producto.getPrecio());
+            cartProducts.add(newProduct);
+        }
+    }
+
 }
