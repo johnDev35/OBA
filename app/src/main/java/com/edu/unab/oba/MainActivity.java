@@ -18,16 +18,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Botón para ir al marketplace
         btnMarketplace = findViewById(R.id.btnMarketplace);
+        btnMarketplace.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "Clicked button", Toast.LENGTH_SHORT).show();
-    }
 
-    public void marketPlace(View v){
-
-        Intent siguiente = new Intent(this,MarketplaceActivity.class);
-        startActivity(siguiente);
+        switch (v.getId()){
+            case R.id.btnMarketplace:
+                Intent intMarketplace = new Intent(this, MarketplaceActivity.class);
+                startActivity(intMarketplace);
+                break;
+            default:
+                break;
+        }
     }
 }
