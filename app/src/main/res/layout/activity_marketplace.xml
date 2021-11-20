@@ -7,50 +7,72 @@
     android:background="@drawable/fondopantallas"
     tools:context=".MarketplaceActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewMarketPlace"
+        android:name="com.edu.unab.oba.FragmentProducts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnShowMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="#D8D7D7"
+        android:contentDescription="Mostrar acciones"
         android:src="@drawable/ic_more"
         android:tint="@color/white"
-        android:backgroundTint="#D8D7D7"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Mostrar acciones"
-        android:id="@+id/btnShowMore"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCheckout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
+        android:contentDescription="Añadir producto"
         android:src="@drawable/ic_checkout"
         app:layout_constraintBottom_toTopOf="@+id/btnShowMore"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Añadir producto"
-        android:id="@+id/btnAddToCart"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSetBudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_budget"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddToCart"
-        app:layout_constraintEnd_toEndOf="@+id/btnAddToCart"
         android:contentDescription="Asignar presupuesto"
-        android:id="@+id/btnSetBudget"/>
+        android:src="@drawable/ic_budget"
+        app:layout_constraintBottom_toTopOf="@+id/btnCheckout"
+        app:layout_constraintEnd_toEndOf="@+id/btnCheckout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnScanCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
+        android:contentDescription="Escanear código"
         android:src="@drawable/ic_barcode"
         app:layout_constraintBottom_toTopOf="@+id/btnSetBudget"
-        app:layout_constraintEnd_toEndOf="@+id/btnSetBudget"
-        android:contentDescription="Escanear código"
-        android:id="@+id/btnScanCode"/>
+        app:layout_constraintEnd_toEndOf="@+id/btnSetBudget" />
 
+    <TextView
+        android:id="@+id/cart_badge"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/badge_background"
+        android:padding="3dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnCheckout"
+        app:layout_constraintTop_toTopOf="@+id/btnCheckout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,5 +15,6 @@
         android:id="@+id/checkout"
         android:icon="@drawable/ic_checkout"
         android:title="ir a pagar"
+        app:actionLayout="@layout/custom_action_cart_item"
         app:showAsAction="always"/>
 </menu>
