@@ -58,7 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(firebaseAuth.getCurrentUser()== null){
             signIn();
         }
-        usuario = firebaseAuth.getCurrentUser().getDisplayName();
+
+        if(firebaseAuth.getCurrentUser().getDisplayName()!= null){
+            usuario = firebaseAuth.getCurrentUser().getDisplayName();
+        }else{
+            usuario = "Anónimo";
+        }
 
         Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();
 
