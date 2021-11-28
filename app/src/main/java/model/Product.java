@@ -9,11 +9,11 @@ public class Product  implements Parcelable {
     private String nombre;
     private int precio;
     private String categoria;
-    private String undMedida;
+    private String und_medida;
     private String ubicacion;
     private String codigo;
     private String formato;
-    private int imagen;
+    private String url_imagen;
 
 
     protected Product(Parcel in) {
@@ -21,11 +21,14 @@ public class Product  implements Parcelable {
         nombre = in.readString();
         precio = in.readInt();
         categoria = in.readString();
-        undMedida = in.readString();
+        und_medida = in.readString();
         ubicacion = in.readString();
         codigo = in.readString();
         formato = in.readString();
-        imagen = in.readInt();
+        url_imagen = in.readString();
+    }
+
+    public Product() {
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -51,24 +54,24 @@ public class Product  implements Parcelable {
         dest.writeString(nombre);
         dest.writeInt(precio);
         dest.writeString(categoria);
-        dest.writeString(undMedida);
+        dest.writeString(und_medida);
         dest.writeString(ubicacion);
         dest.writeString(codigo);
         dest.writeString(formato);
-        dest.writeInt(imagen);
+        dest.writeString(url_imagen);
     }
 
 
-    public Product(String marca, String nombre, int precio, String categoria, String undMedida, String ubicacion, String codigo, String formato, int imagen) {
+    public Product(String marca, String nombre, int precio, String categoria, String undMedida, String ubicacion, String codigo, String formato, String imagen) {
         this.marca = marca;
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
-        this.undMedida = undMedida;
+        this.und_medida = undMedida;
         this.ubicacion = ubicacion;
         this.codigo = codigo;
         this.formato = formato;
-        this.imagen = imagen;
+        this.url_imagen = imagen;
     }
 
     public String getMarca() {
@@ -88,7 +91,7 @@ public class Product  implements Parcelable {
     }
 
     public String getUndMedida() {
-        return undMedida;
+        return und_medida;
     }
 
     public String getUbicacion() {
@@ -99,8 +102,8 @@ public class Product  implements Parcelable {
         return codigo;
     }
 
-    public int getImagen() {
-        return imagen;
+    public String getImagen() {
+        return url_imagen;
     }
 
     public String getFormato() {
@@ -114,12 +117,47 @@ public class Product  implements Parcelable {
                 ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", categoria='" + categoria + '\'' +
-                ", undMedida='" + undMedida + '\'' +
+                ", undMedida='" + und_medida + '\'' +
                 ", ubicacion='" + ubicacion + '\'' +
                 ", codigo='" + codigo + '\'' +
                 ", formato='" + formato + '\'' +
-                ", imagen=" + imagen +
+                ", imagen=" + url_imagen +
                 '}';
     }
 
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setUnd_medida(String und_medida) {
+        this.und_medida = und_medida;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setFormato(String formato) {
+        this.formato = formato;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
+    }
 }
