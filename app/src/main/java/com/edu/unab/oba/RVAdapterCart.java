@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,11 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Cart currentCartProduct = cartProducts.get(position);
-        holder.imgViewProductInCart.setImageResource(currentCartProduct.getProducto().getImagen());
+
+        Picasso.get().load(currentCartProduct.getProducto().getImagen())
+                .placeholder(R.drawable.no_products)
+                .into(holder.imgViewProductInCart);
+
         holder.edTxtUnitPriceInCart.setText("" + currentCartProduct.getProducto().getPrecio());
         holder.edTxtQuantityInCart.setText("" + currentCartProduct.getCantidad());
         holder.edTxtTotalPrice.setText("" + currentCartProduct.getValorItem());
