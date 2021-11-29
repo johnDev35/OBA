@@ -8,78 +8,11 @@
     android:padding="@dimen/distancia_normal"
     tools:context=".MainActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCarrito"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="40dp"
-        android:contentDescription="Añadir producto"
-        android:src="@drawable/ic_checkout"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnTienda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:contentDescription="MarketPlaces"
-        android:src="@drawable/ic_tienda"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCarrito"
-        app:layout_constraintStart_toEndOf="@+id/btnCarrito"
-        app:layout_constraintTop_toTopOf="@+id/btnCarrito"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnHistorico"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:contentDescription="Historico"
-        android:src="@drawable/ic_historico"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnTienda"
-        app:layout_constraintStart_toEndOf="@+id/btnTienda"
-        app:layout_constraintTop_toTopOf="@+id/btnTienda"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnChat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:contentDescription="Chat"
-        android:src="@drawable/ic_chat"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnHistorico"
-        app:layout_constraintStart_toEndOf="@+id/btnHistorico"
-        app:layout_constraintTop_toTopOf="@+id/btnHistorico"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnComprar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="40dp"
-        android:contentDescription="Productos"
-        android:src="@drawable/ic_comprar"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnChat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnChat"
-        app:layout_constraintTop_toTopOf="@+id/btnChat"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ImageView
         android:id="@+id/iv_logo"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -140,19 +73,21 @@
             android:id="@+id/ll_registro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_recuperarContra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/texto_recuperar"/>
+                android:text="@string/texto_recuperar" />
+
             <TextView
                 android:id="@+id/tv_registrarse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/registrarse"
-                android:layout_marginStart="32dp"/>
+                android:layout_marginStart="32dp"
+                android:text="@string/registrarse" />
         </LinearLayout>
 
         <TextView
@@ -168,5 +103,69 @@
 
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_menuInferior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnCarrito"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:contentDescription="Añadir producto"
+                android:src="@drawable/ic_carrito"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnTienda"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:contentDescription="MarketPlaces"
+                android:src="@drawable/ic_tienda"
+                android:layout_marginStart="16dp"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnHistorico"
+                android:layout_width="50dp"
+                android:layout_height="46dp"
+                android:contentDescription="Historico"
+                android:src="@drawable/ic_historico"
+                android:layout_marginStart="16dp"
+                app:backgroundTint="#571B1B" />
+
+            <ImageView
+                android:id="@+id/btnChat"
+                android:layout_width="45dp"
+                android:layout_height="46dp"
+                android:contentDescription="Chat"
+                android:src="@drawable/ic_chat"
+                android:layout_marginStart="16dp"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnComprar"
+                android:layout_width="53dp"
+                android:layout_height="46dp"
+                android:contentDescription="Productos"
+                android:src="@drawable/ic_comprar"
+                android:layout_marginStart="16dp"
+                app:backgroundTint="#E3E0E0" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

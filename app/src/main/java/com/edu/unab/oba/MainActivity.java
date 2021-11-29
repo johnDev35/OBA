@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,14 +34,18 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
+import model.Cart;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnMarketplace,btnHistorico;
-    private ImageView iv_logo;
+    private Button btnMarketplace;
+    private ImageView iv_logo,btnHistorico,btnTienda,btnCarrito;
     private EditText et_usuario,et_contraseña;
     private TextView tv_recuperarContra,tv_registrarse;
     private String correo,contraseña;
-
+    ArrayList<Cart> cartProducts = new ArrayList<>();
 
     // Authentication for Firebase
     FirebaseAuth firebaseAuth;
@@ -54,7 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Botón para ir al marketplace
         btnMarketplace = findViewById(R.id.btnMarketplace);
-        //btnHistorico = findViewById(R.id.btnHistorico);
+        btnHistorico = findViewById(R.id.btnHistorico);
+        btnTienda = findViewById(R.id.btnTienda);
+        btnCarrito = findViewById(R.id.btnCarrito);
         iv_logo = findViewById(R.id.iv_logo);
         et_usuario = findViewById(R.id.et_usuario);
         et_contraseña = findViewById(R.id.et_contraseña);
@@ -68,11 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnMarketplace.setOnClickListener(this);
 
-        //btnHistorico.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-                //Toast.makeText(MainActivity.this,"login ", Toast.LENGTH_LONG).show();}});
-
         tv_recuperarContra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,11 +82,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-
         tv_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,RegistrarUsuarioActivity.class));
+            }
+        });
+
+        btnTienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MarketplaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHistorico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,historico.class);
+                startActivity(intent);
             }
         });
 
