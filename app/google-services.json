@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "663408304694",
+    "project_id": "proyecto-oba",
+    "storage_bucket": "proyecto-oba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663408304694:android:5eb714e1d35b6945f3ee97",
+        "android_client_info": {
+          "package_name": "com.edu.unab.oba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663408304694-mr0ping66sc3smrt801ktk1oln40m588.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.unab.oba",
+            "certificate_hash": "b0d4accfe3dff8387cf12f31762fe16f89782064"
+          }
+        },
+        {
+          "client_id": "663408304694-fpfn9onjkfte0vlrtvena48djdq4dcie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-i2UiYlyOomJoKqiuxv1T0Vbx_yqzy9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663408304694-fpfn9onjkfte0vlrtvena48djdq4dcie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

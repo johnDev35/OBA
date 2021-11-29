@@ -1,7 +1,10 @@
 package com.edu.unab.oba;
 
+
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,105 +16,54 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import model.Brand;
-import model.Cart;
 import model.Category;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentProducts#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentProducts extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FirebaseFirestore dbCategories, dbBrands, dbProducts;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ArrayList<Brand> brands = new ArrayList<>();
+    ArrayList<Category> categories = new ArrayList<>();
+
+    Spinner spnCategory;
+    RecyclerView parentRVMarketplace;
+    RecyclerView.LayoutManager parentLayoutManager;
+    // Adapters
+    SpinnerAdapterMarketplace spinnerAdapterMarketplace;
+    ParentRVAdapterMarketplace parentRVAdapterMarketplace;
 
     public FragmentProducts() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentProducts.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentProducts newInstance(String param1, String param2) {
-        FragmentProducts fragment = new FragmentProducts();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
-    Spinner spnCategory;
-    ArrayList<Brand> brands = new ArrayList<>();
-    ArrayList<Category> categories = new ArrayList<>();
-    ArrayList <Cart> cartProducts = new ArrayList<>();
-
-    RecyclerView parentRVMarketplace;
-    RecyclerView.LayoutManager parentLayoutManager;
 
     @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_products, container, false);
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_products, container, false);
 
-        //TODO Crear marcas de productos
-
-        brands.add(new Brand("Colombina"));
-        brands.add(new Brand("Bianchi"));
-        brands.add(new Brand("Fruticas"));
-        brands.add(new Brand("Barrilete"));
-
-        // RECYCLER VIEW
-        parentRVMarketplace = view.findViewById(R.id.parentRVProduct);
-        // Adaptador RV
-        ParentRVAdapterMarketplace parentRVAdapterMarketplace = new ParentRVAdapterMarketplace(getContext());
-        parentRVAdapterMarketplace.setBrands(brands);
-
-        // Layout RV
-        parentLayoutManager = new LinearLayoutManager(getContext());
-        parentRVMarketplace.setAdapter(parentRVAdapterMarketplace);
-        parentRVMarketplace.setLayoutManager(parentLayoutManager);
-
-
-        // SPINNER
+        // Spinner
         spnCategory = view.findViewById(R.id.spnCategory);
-
-        //TODO lista de categorías de productos
-
-        categories.add(new Category("Caramelos",R.drawable.category_candy));
-        categories.add(new Category("Barras de cereal", R.drawable.category_candy));
-        categories.add(new Category("Chocolates", R.drawable.category_candy));
-        categories.add(new Category("Dulces duros", R.drawable.category_candy));
-        categories.add(new Category("Bombones", R.drawable.category_lollipop));
-
-        SpinnerAdapterMarketplace spinnerAdapterMarketplace;
         spinnerAdapterMarketplace = new SpinnerAdapterMarketplace(getContext(), categories);
         spnCategory.setAdapter(spinnerAdapterMarketplace);
 
@@ -119,7 +71,10 @@ public class FragmentProducts extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Category selectedCategory = (Category) parent.getItemAtPosition(position);
-                Toast.makeText(getContext(), selectedCategory.getCategory() + " selected" , Toast.LENGTH_SHORT).show();
+                parentRVAdapterMarketplace.setCategory(selectedCategory.getCategory());
+                brands.clear();
+                loadBrandsForCategory(selectedCategory.getCategory());
+                Toast.makeText(getContext(), selectedCategory.getCategory() + " selected " , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -128,6 +83,96 @@ public class FragmentProducts extends Fragment {
             }
         });
 
+        // RECYCLER VIEW
+        parentRVMarketplace = view.findViewById(R.id.parentRVProduct);
+        // Adapter RV
+        parentRVAdapterMarketplace = new ParentRVAdapterMarketplace(getContext());
+        parentRVAdapterMarketplace.setBrands(brands);
+
+        // Layout RV
+        parentLayoutManager = new LinearLayoutManager(getContext());
+        parentRVMarketplace.setAdapter(parentRVAdapterMarketplace);
+        parentRVMarketplace.setLayoutManager(parentLayoutManager);
+
+        loadCategories();
+
         return view;
     }
+
+    private void loadCategories(){
+
+        dbCategories = FirebaseFirestore.getInstance();
+        FirebaseStorage dbImages = FirebaseStorage.getInstance();
+
+        dbCategories.collection("/product_categories")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                // Reference images in Storage
+                                StorageReference storageRef = dbImages.getReferenceFromUrl(document.getData().get("image_url").toString());
+                                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        //add element to list
+                                        categories.add(new Category(document.getId(), uri.toString()));
+                                        //loadBrandsForCategory(document.getId());
+                                        spinnerAdapterMarketplace.notifyDataSetChanged();
+                                    }
+                                });
+                            }
+                        } else {
+                            Category emptyCategory = new Category("No hay categorías para cargar", "None");
+                            categories.add(emptyCategory);
+                        }
+                    }
+                });
+    }
+
+
+    private void loadBrandsForCategory(String category){
+        dbBrands = FirebaseFirestore.getInstance();
+        dbBrands.collection("/product_categories/" + category +"/brands")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Brand newBrand = new Brand(document.getId());
+                        //newBrand.setProductos(addBrandProducts(category, document.getId()));
+                        brands.add(newBrand);
+                        parentRVAdapterMarketplace.notifyDataSetChanged();
+                    }
+                } else{
+                    Toast.makeText(getContext(), category + " not Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    /// Review if need it -- commented on line 143
+    private ArrayList<String> addBrandProducts(String category, String brand){
+        ArrayList<String> products = new ArrayList<>();
+        dbProducts = FirebaseFirestore.getInstance();
+        dbProducts.collection("/product_categories/" + category + "/brands/" + brand + "/id_products")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for(QueryDocumentSnapshot document: task.getResult()) {
+                                products.add(document.getId());
+                            }
+                        }
+                    }
+                });
+        return products;
+    }
+
 }
+
+
+
+

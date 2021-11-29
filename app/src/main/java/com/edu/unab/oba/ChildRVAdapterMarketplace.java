@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,7 +47,6 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
         holder.txtPrice.setText("$"+currentItem.getPrecio());
         holder.txtFormat.setText(currentItem.getFormato());
         holder.txtLocation.setText(currentItem.getUbicacion());
-        holder.imgViewProduct.setImageResource(currentItem.getImagen());
         holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +56,25 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
                 Toast.makeText(context,  currentItem.getMarca() + " " + currentItem.getNombre() + " seleccionado", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        holder.progressBar.setVisibility(View.VISIBLE);
+        Picasso.get().load(currentItem.getImagen())
+                .placeholder(R.drawable.no_products)
+                .into(holder.imgViewProduct, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if (holder.progressBar != null) {
+                            holder.progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+
+                });
     }
 
     @Override
@@ -71,6 +91,7 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
         TextView txtProductName, txtPrice, txtFormat, txtLocation;
         ImageView imgViewProduct;
         FloatingActionButton btnAddToCart;
+        ProgressBar progressBar;
         public ChildViewHolder(@NonNull View itemView) {
             super(itemView);
             txtProductName = itemView.findViewById(R.id.txtProductName);
@@ -79,6 +100,7 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
             txtLocation = itemView.findViewById(R.id.txtLocation);
             imgViewProduct = itemView.findViewById(R.id.imgViewProduct);
             btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
+            progressBar = itemView.findViewById(R.id.progressBar);
         }
     }
 }
