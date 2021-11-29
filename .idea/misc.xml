@@ -4,8 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/drawable-anydpi/ic_barcode.xml" value="0.22736486486486487" />
-        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_marketplace.xml" value="0.28532608695652173" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_recuperar.xml" value="0.23783783783783785" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_recuperar_contra.xml" value="0.22" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_registrar_usuario.xml" value="0.2" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_registro.xml" value="0.23783783783783785" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_registro_usuario.xml" value="0.22" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_registroproducto.xml" value="0.23783783783783785" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/fragment_first.xml" value="0.23783783783783785" />
+        <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/fragment_second.xml" value="0.23783783783783785" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/drawable/ic_more.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/usuario/Desktop/Estudio/MinTIC 2022/UNAB/Ciclo 4/Desarrollo Aplicaciones Moviles/Proyecto OBA/app/src/main/res/layout/activity_marketplace.xml" value="0.25" />
