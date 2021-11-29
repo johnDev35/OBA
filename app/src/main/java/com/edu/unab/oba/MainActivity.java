@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Authentication for Firebase
     FirebaseAuth firebaseAuth;
     GoogleSignInClient mGoogleSignInClient;
+
     private static final String TAG = "Login with Google";
 
     @Override
@@ -53,23 +54,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Authorization
         firebaseAuth = FirebaseAuth.getInstance();
 
-        String usuario;
+        signIn();
 
-        if(firebaseAuth.getCurrentUser()== null){
-            signIn();
-        }
-
-        if(firebaseAuth.getCurrentUser().getDisplayName()!= null){
-            usuario = firebaseAuth.getCurrentUser().getDisplayName();
-        }else{
-            usuario = "Anónimo";
-        }
-
-        Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();
 
         // Botón para ir al marketplace
         btnMarketplace = findViewById(R.id.btnMarketplace);
         btnMarketplace.setOnClickListener(this);
+    }
+
+    public void onLoggedIn(String usuario){
+        Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -101,11 +95,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            //updateUI(user);
+                            onLoggedIn(firebaseAuth.getCurrentUser().getDisplayName());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            //updateUI(null);
+                            onLoggedIn("Anónimo");
                         }
                     }
                 });
