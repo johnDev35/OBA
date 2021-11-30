@@ -41,7 +41,7 @@ import model.Cart;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnMarketplace;
-    private ImageView iv_logo,btnHistorico,btnTienda,btnCarrito;
+    private ImageView iv_logo,btnHistorico,btnTienda,btnCarrito,btnChat;
     private EditText et_usuario,et_contraseña;
     private TextView tv_recuperarContra,tv_registrarse;
     private String correo,contraseña;
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnHistorico = findViewById(R.id.btnHistorico);
         btnTienda = findViewById(R.id.btnTienda);
         btnCarrito = findViewById(R.id.btnCarrito);
+        btnChat = findViewById(R.id.btnChat);
         iv_logo = findViewById(R.id.iv_logo);
         et_usuario = findViewById(R.id.et_usuario);
         et_contraseña = findViewById(R.id.et_contraseña);
@@ -100,6 +101,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,historico.class);
+                startActivity(intent);
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AssistantActivity.class);
                 startActivity(intent);
             }
         });
