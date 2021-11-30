@@ -2,9 +2,12 @@ package model;
 
 public class Category {
     String category;
-    int imgCategory;
+    String imgCategory;
 
-    public Category(String category, int imgCategory) {
+    public Category() {
+    }
+
+    public Category(String category, String imgCategory) {
         this.category = category;
         this.imgCategory = imgCategory;
     }
@@ -13,7 +16,7 @@ public class Category {
         return category;
     }
 
-    public int getImgCategory() {
+    public String getImgCategory() {
         return imgCategory;
     }
 }
