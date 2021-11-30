@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btnMarketplace;
+    Button btnMarketplace, btnAdministrador;
 
     // Authentication for Firebase
     FirebaseAuth firebaseAuth;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Configure Google Sign In
+        /*// Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -60,11 +60,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         usuario = firebaseAuth.getCurrentUser().getDisplayName();
 
-        Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();*/
 
         // Botón para ir al marketplace
         btnMarketplace = findViewById(R.id.btnMarketplace);
         btnMarketplace.setOnClickListener(this);
+        btnAdministrador=findViewById(R.id.btnAdministrador);
+        btnAdministrador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentProductos = new Intent(MainActivity.this, ModuloAdministrador.class);
+                startActivity(intentProductos);
+            }
+        });
     }
 
     @Override

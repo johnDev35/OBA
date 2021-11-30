@@ -21,8 +21,8 @@ public class ModuloAdministrador extends AppCompatActivity {
         btnPersonas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentPersonas = new Intent(ModuloAdministrador.this, ListarPersonasActivity.class);
-                startActivity(intentPersonas);
+                Intent intentAdmin = new Intent(ModuloAdministrador.this, ListarPersonasActivity.class);
+                startActivity(intentAdmin);
             }
         });
     }
