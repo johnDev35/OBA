@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
         <activity
-            android:name=".ModuloAdministrador"
+            android:name=".AssistantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarUsuarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecuperarContraActivity"
             android:exported="false" />
         <activity
             android:name=".historico"

@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,8 +32,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
+import model.Cart;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btnMarketplace, btnAdministrador;
+
+    private Button btnMarketplace;
+    private ImageView iv_logo,btnHistorico,btnTienda,btnCarrito,btnChat;
+    private EditText et_usuario,et_contraseña;
+    private TextView tv_recuperarContra,tv_registrarse;
+    private String correo,contraseña;
+    ArrayList<Cart> cartProducts = new ArrayList<>();
 
     // Authentication for Firebase
     FirebaseAuth firebaseAuth;
@@ -41,38 +57,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*// Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // Authorization
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        String usuario;
-
-        if(firebaseAuth.getCurrentUser()== null){
-            signIn();
-        }
-        usuario = firebaseAuth.getCurrentUser().getDisplayName();
-
-        Toast.makeText(this, "Bienvenido " + usuario, Toast.LENGTH_LONG).show();*/
-
         // Botón para ir al marketplace
         btnMarketplace = findViewById(R.id.btnMarketplace);
+        btnHistorico = findViewById(R.id.btnHistorico);
+        btnTienda = findViewById(R.id.btnTienda);
+        btnCarrito = findViewById(R.id.btnCarrito);
+        btnChat = findViewById(R.id.btnChat);
+        iv_logo = findViewById(R.id.iv_logo);
+        et_usuario = findViewById(R.id.et_usuario);
+        et_contraseña = findViewById(R.id.et_contraseña);
+        tv_recuperarContra = findViewById(R.id.tv_recuperarContra);
+        tv_registrarse = findViewById(R.id.tv_registrarse);
+
+        //iv_logo.setImageResource(R.drawable.ic_usuario);
+
+        correo =et_usuario.getText().toString();
+        contraseña =et_contraseña.getText().toString();
+
         btnMarketplace.setOnClickListener(this);
-        btnAdministrador=findViewById(R.id.btnAdministrador);
-        btnAdministrador.setOnClickListener(new View.OnClickListener() {
+
+        tv_recuperarContra.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intentProductos = new Intent(MainActivity.this, ModuloAdministrador.class);
-                startActivity(intentProductos);
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,RecuperarContraActivity.class);
+                startActivity(intent);
             }
         });
+        tv_registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,RegistrarUsuarioActivity.class));
+            }
+        });
+
+        btnTienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MarketplaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHistorico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,historico.class);
+                startActivity(intent);
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AssistantActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -92,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         mStartForResult.launch(new Intent(signInIntent));
     }
+
 
     // [START auth_with_google]
     private void firebaseAuthWithGoogle(String idToken) {

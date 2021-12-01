@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondoinicio"
     android:padding="@dimen/distancia_normal"
-    tools:context=".historico">
+    tools:context=".AssistantActivity">
 
     <TextView
         android:id="@+id/tv_recuperarContra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="historico"
+        android:text="Chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +81,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
