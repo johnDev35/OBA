@@ -160,9 +160,10 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
                 areThereProducts = true;
             }
 
-            if(areThereProducts)
+            if(areThereProducts) {
                 collectionReference.document(currentDateTime).set(resumenCompra);
                 Toast.makeText(getContext(), "Los productos del carrito se guardaron exitosamente", Toast.LENGTH_SHORT).show();
+            }
             else
                 Toast.makeText(getContext(), "No hay productos en el carrito", Toast.LENGTH_SHORT).show();
         }
