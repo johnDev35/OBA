@@ -4,21 +4,29 @@ import java.util.ArrayList;
 
 public class Brand {
     String brand;
-    ArrayList<String> productos= new ArrayList<>();
+    ArrayList<Product> products = new ArrayList<>();
 
-    public Brand(String brand) {
-        this.brand = brand;
+
+    public Brand() {
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public ArrayList<String> getProductos() {
-        return productos;
+    public ArrayList<Product> getProducts() {
+        return products;
     }
 
-    public void setProductos(ArrayList<String> productos) {
-        this.productos = productos;
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public  void addProduct(Product product){
+        products.add(product);
     }
 }

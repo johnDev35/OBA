@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -59,22 +60,38 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
 
 
         holder.progressBar.setVisibility(View.VISIBLE);
-        Picasso.get().load(currentItem.getImagen())
-                .placeholder(R.drawable.no_products)
-                .into(holder.imgViewProduct, new com.squareup.picasso.Callback() {
+        Picasso.get()
+                .setIndicatorsEnabled(true);
+
+        Picasso.get()
+                .load(currentItem.getImagen())
+                .fetch(new Callback() {
                     @Override
                     public void onSuccess() {
-                        if (holder.progressBar != null) {
-                            holder.progressBar.setVisibility(View.GONE);
-                        }
-                    }
+                        Picasso.get()
+                                .load(currentItem.getImagen())
+                                .placeholder(R.drawable.no_products)
+                                .into(holder.imgViewProduct, new com.squareup.picasso.Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        if (holder.progressBar != null) {
+                                            holder.progressBar.setVisibility(View.GONE);
+                                        }
+                                    }
+                                    @Override
+                                    public void onError(Exception e) {
 
+                                    }
+                                });
+                    }
                     @Override
                     public void onError(Exception e) {
-
+                        Picasso.get()
+                                .load(R.drawable.no_products)
+                                .into(holder.imgViewProduct);
                     }
-
                 });
+
     }
 
     @Override
