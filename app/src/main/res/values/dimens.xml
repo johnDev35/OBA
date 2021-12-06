@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="distancia_minima">8dp</dimen>
     <dimen name="distancia_normal">15dp</dimen>
     <dimen name="dimencion_maxima">32dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="boton_esquina">8dp</dimen>
 </resources>

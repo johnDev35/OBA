@@ -23,7 +23,7 @@ public class historico extends AppCompatActivity {
         btnTienda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(historico.this,MarketplaceActivity.class);
+                Intent intent = new Intent(historico.this, MarketplaceActivity.class);
                 startActivity(intent);
             }
         });
