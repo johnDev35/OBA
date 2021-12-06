@@ -23,25 +23,28 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#E3E3E3"
             android:clickable="true"
+            android:focusable="true"
             android:elevation="10dp"
-            app:fabSize="mini"
+            app:fabCustomSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="12dp"
-            app:srcCompat="@drawable/ic_delete_item" />
+            app:srcCompat="@drawable/ic_delete_item"
+            android:contentDescription="eliminar producto del carrito"/>
 
 
         <ImageView
             android:id="@+id/imgViewProductInCart"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
 
             android:adjustViewBounds="true"
             android:contentDescription="Imagen de producto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/no_products"
+            android:layout_marginStart="15dp"/>
 
         <TextView
             android:id="@+id/txtProductNameInCart"
@@ -60,8 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Precio unitario"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtProductNameInCart"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/txtProductNameInCart"
             app:layout_constraintTop_toBottomOf="@+id/txtProductNameInCart" />
 
@@ -71,21 +73,27 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:hint="$0.0"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
             android:textAlignment="textEnd"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtProductNameInCart"
-            app:layout_constraintStart_toStartOf="@+id/txtProductNameInCart"
-            app:layout_constraintTop_toBottomOf="@+id/txtUnitPriceinCart" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtUnitPriceinCart"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddItems"
+            app:layout_constraintStart_toEndOf="@+id/txtUnitPriceinCart"
+            app:layout_constraintTop_toTopOf="@+id/txtUnitPriceinCart" />
 
         <TextView
             android:id="@+id/txtQuantityInCart"
             android:layout_width="0dp"
+            android:minWidth="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Cantidad"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtProductNameInCart"
-            app:layout_constraintStart_toStartOf="@+id/txtProductNameInCart"
-            app:layout_constraintTop_toBottomOf="@+id/edTxtUnitPriceinCart" />
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/btnRemoveItems"
+            app:layout_constraintStart_toStartOf="@+id/txtTotalPrice"
+            app:layout_constraintTop_toBottomOf="@+id/txtUnitPriceinCart" />
 
         <EditText
             android:id="@+id/edTxtQuantityInCart"
@@ -93,19 +101,22 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:hint="0"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
             android:textAlignment="textEnd"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtUnitPriceinCart"
-            app:layout_constraintStart_toStartOf="@+id/txtProductNameInCart"
-            app:layout_constraintTop_toBottomOf="@+id/txtQuantityInCart" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRemoveItems"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddItems"
+            app:layout_constraintTop_toTopOf="@+id/btnRemoveItems"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/txtTotalPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Precio total"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtProductNameInCart"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/txtProductNameInCart"
             app:layout_constraintTop_toBottomOf="@id/edTxtQuantityInCart" />
 
@@ -114,27 +125,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:hint="$0.0"
+            android:hint="$20.0"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
             android:textAlignment="textEnd"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/txtProductNameInCart"
-            app:layout_constraintTop_toBottomOf="@id/txtTotalPrice" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTotalPrice"
+            app:layout_constraintEnd_toEndOf="@+id/edTxtQuantityInCart"
+            app:layout_constraintStart_toEndOf="@+id/txtTotalPrice"
+            app:layout_constraintTop_toTopOf="@+id/txtTotalPrice" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAddItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
             android:backgroundTint="#E3E3E3"
             android:clickable="true"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnRemoveItems"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imgViewProductInCart"
-            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="Aumentar cantidad"
+            android:focusable="true"
+            app:fabCustomSize="20dp"
+            android:layout_marginEnd="-10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRemoveItems"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnRemoveItems"
             app:maxImageSize="12dp"
             app:srcCompat="@drawable/ic_more" />
 
@@ -142,16 +156,16 @@
             android:id="@+id/btnRemoveItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:backgroundTint="#E3E3E3"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="@+id/btnAddItems"
-            app:layout_constraintEnd_toStartOf="@+id/txtTotalPrice"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnAddItems"
-            app:layout_constraintTop_toTopOf="@+id/btnAddItems"
+            android:clickable="true"
+            android:focusable="true"
+            app:fabCustomSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtQuantityInCart"
+            app:layout_constraintEnd_toStartOf="@+id/edTxtQuantityInCart"
+            app:layout_constraintTop_toTopOf="@+id/txtQuantityInCart"
             app:maxImageSize="12dp"
-            app:srcCompat="@drawable/ic_remove_item" />
+            app:srcCompat="@drawable/ic_remove_item"
+            android:contentDescription="Disminuir cantidad"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

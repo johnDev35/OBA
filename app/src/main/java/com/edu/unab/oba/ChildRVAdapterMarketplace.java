@@ -23,10 +23,10 @@ import model.Product;
 public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapterMarketplace.ChildViewHolder> {
 
 
-    ArrayList <Product> products = new ArrayList<>();
+    ArrayList<Product> products = new ArrayList<>();
     Context context;
 
-    public ChildRVAdapterMarketplace( Context context) {
+    public ChildRVAdapterMarketplace(Context context) {
         this.context = context;
     }
 
@@ -34,9 +34,9 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
     @Override
     public ChildViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(
-          R.layout.child_rv_item_marketplace,
-          parent,
-          false
+                R.layout.child_rv_item_marketplace,
+                parent,
+                false
         );
         return new ChildViewHolder(view);
     }
@@ -45,16 +45,15 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
     public void onBindViewHolder(@NonNull ChildViewHolder holder, int position) {
         Product currentItem = products.get(position);
         holder.txtProductName.setText(currentItem.getNombre());
-        holder.txtPrice.setText("$"+currentItem.getPrecio());
+        holder.txtPrice.setText("$" + currentItem.getPrecio());
         holder.txtFormat.setText(currentItem.getFormato());
-        holder.txtLocation.setText(currentItem.getUbicacion());
+        holder.txtLocation.setText("Ubicado en módulo: " + currentItem.getUbicacion());
         holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(context instanceof MarketplaceActivity) {
+                if (context instanceof MarketplaceActivity) {
                     ((MarketplaceActivity) context).addToCart(currentItem);
                 }
-                Toast.makeText(context,  currentItem.getMarca() + " " + currentItem.getNombre() + " seleccionado", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -78,12 +77,14 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
                                             holder.progressBar.setVisibility(View.GONE);
                                         }
                                     }
+
                                     @Override
                                     public void onError(Exception e) {
 
                                     }
                                 });
                     }
+
                     @Override
                     public void onError(Exception e) {
                         Picasso.get()
@@ -104,11 +105,12 @@ public class ChildRVAdapterMarketplace extends RecyclerView.Adapter<ChildRVAdapt
         notifyDataSetChanged();
     }
 
-    public class ChildViewHolder extends RecyclerView.ViewHolder{
+    public class ChildViewHolder extends RecyclerView.ViewHolder {
         TextView txtProductName, txtPrice, txtFormat, txtLocation;
         ImageView imgViewProduct;
         FloatingActionButton btnAddToCart;
         ProgressBar progressBar;
+
         public ChildViewHolder(@NonNull View itemView) {
             super(itemView);
             txtProductName = itemView.findViewById(R.id.txtProductName);

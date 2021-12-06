@@ -23,8 +23,7 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
     FloatingActionButton btnShowMore, btnAddToCart, btnSetBudget, btnScanCode;
     Boolean showMoreIsEnabled;
     ArrayList<Cart> cartProducts = new ArrayList<>();
-
-    int numItems;
+    int totalPrice = 0, numItems = 0;
     TextView txtCartItems, txtCartItemsMenu;
 
     @Override
@@ -69,7 +68,7 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         final MenuItem itmCart;
         itmCart = menu.findItem(R.id.checkout);
         View actionView = itmCart.getActionView();
-        txtCartItemsMenu = (TextView) actionView.findViewById(R.id.cart_badge_menu);
+        txtCartItemsMenu = actionView.findViewById(R.id.cart_badge_menu);
         updateBadge(txtCartItemsMenu);
 
         return true;
@@ -137,7 +136,7 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
                     txtUpdateBadge.setVisibility(View.GONE);
                 }
             } else {
-                txtUpdateBadge.setText(String.valueOf(Math.min(numItems, 99)));
+                txtUpdateBadge.setText(String.valueOf(Math.min(numItems, 999)));
                 if (txtUpdateBadge.getVisibility() != View.VISIBLE) {
                     txtUpdateBadge.setVisibility(View.VISIBLE);
                 }
@@ -147,27 +146,50 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void addToCart(Product producto) {
-        numItems += 1;
-        updateBadge(txtCartItems);
-        updateBadge(txtCartItemsMenu);
-
 
         //Buscar si el producto está en el carro de compras si está suma uno a la cantidad
         // de lo contrario lo añade a la lista
         boolean inCart = false;
+        int priceItem = 0;
         for (Cart cartProduct : cartProducts) {
             if (cartProduct.getProducto().getNombre().equals(producto.getNombre())) {
                 cartProduct.setCantidad(cartProduct.getCantidad() + 1);
-                cartProduct.setValorItem(cartProduct.getProducto().getPrecio() * cartProduct.getCantidad());
+                priceItem = cartProduct.getProducto().getPrecio() * cartProduct.getCantidad();
+                cartProduct.setValorItem(priceItem);
                 inCart = true;
                 break;
             }
         }
 
         if (!inCart) {
-            Cart newProduct = new Cart(producto, 1, producto.getPrecio());
+            priceItem = producto.getPrecio();
+            Cart newProduct = new Cart(producto, 1, priceItem);
             cartProducts.add(newProduct);
         }
+        updatePrice(totalPrice + priceItem);
+        updateQuantity(numItems+1);
     }
+
+    public void updateCart(ArrayList<Cart> updatedCartProducts){
+        this.cartProducts = updatedCartProducts;
+    }
+    public void updateQuantity(int quantity){
+        numItems = quantity;
+        updateBadge(txtCartItems);
+        updateBadge(txtCartItemsMenu);
+    }
+
+    public void updatePrice(int price){
+        totalPrice = price;
+    }
+
+    public int getQuantity(){
+        return numItems;
+    }
+
+    public int getTotalPrice(){
+        return totalPrice;
+    }
+
 
 }
