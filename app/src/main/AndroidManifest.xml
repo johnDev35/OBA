@@ -13,13 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".AssistantActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrarUsuarioActivity"
+            android:name=".vistas.RegistroUsuarioActivity"
             android:exported="false" />
         <activity
-            android:name=".RecuperarContraActivity"
+            android:name=".vistas.RecuperarContraActivity"
             android:exported="false" />
         <activity
             android:name=".historico"
@@ -29,7 +32,7 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".vistas.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

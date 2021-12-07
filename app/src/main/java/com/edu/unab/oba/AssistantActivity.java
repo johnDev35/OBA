@@ -24,14 +24,14 @@ public class AssistantActivity extends AppCompatActivity {
         btnTienda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AssistantActivity.this,MarketplaceActivity.class);
+                Intent intent = new Intent(AssistantActivity.this, MarketplaceActivity.class);
                 startActivity(intent);
             }
         });
         btnHistorico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AssistantActivity.this,historico.class);
+                Intent intent = new Intent(AssistantActivity.this, historico.class);
                 startActivity(intent);
             }
         });

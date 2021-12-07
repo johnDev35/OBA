@@ -2,11 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-
-apply plugin: 'com.google.gms.google-services'  // Google Services plugin
-
-
-
 android {
     compileSdk 31
 
@@ -60,6 +55,6 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-
-
 }
+
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin

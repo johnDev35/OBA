@@ -6,18 +6,19 @@
     android:layout_height="match_parent"
     android:padding="@dimen/distancia_normal"
     android:background="@drawable/fondoinicio"
-    tools:context=".RegistrarUsuarioActivity">
+    tools:context=".vistas.RegistroUsuarioActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/formRegistro"
@@ -25,89 +26,86 @@
             android:layout_height="50dp"
             android:text="Registro Usuarios"
             android:textAlignment="center"
-            android:textSize="30dp"
             android:textColor="@color/purple_700"
+            android:textSize="30dp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/et_nombre_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:gravity="center"
-            android:hint="Nombre Usuario"
-            android:layout_marginTop="@dimen/distancia_normal"/>
 
         <EditText
             android:id="@+id/et_nombres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distancia_normal"
-            android:inputType="textPersonName"
+            android:layout_marginTop="@dimen/distancia_minima"
             android:gravity="center"
-            android:hint="Nombres"/>
+            android:hint="Nombres"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/et_apellidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distancia_normal"
-            android:inputType="textPersonName"
+            android:layout_marginTop="@dimen/distancia_minima"
             android:gravity="center"
-            android:hint="Apellidos"/>
+            android:hint="Apellidos"
+            android:inputType="textPersonName" />
+
 
         <EditText
-            android:id="@+id/ed_celular"
+            android:id="@+id/et_celular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distancia_normal"
-            android:inputType="number"
+            android:layout_marginTop="@dimen/distancia_minima"
             android:gravity="center"
-            android:hint="Celular"/>
+            android:hint="Celular"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/et_correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distancia_minima"
+            android:gravity="center"
+            android:hint="Correo Electrónico"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/et_contra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distancia_normal"
-            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/distancia_minima"
             android:gravity="center"
-            android:hint="Contraseña"/>
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/et_email"
+            android:id="@+id/et_contraConfirmar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distancia_normal"
-            android:inputType="textEmailAddress"
+            android:layout_marginTop="@dimen/distancia_minima"
             android:gravity="center"
-            android:hint="Correo Electrónico"/>
+            android:hint="Confirmar Contraseña"
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/et_dirrecion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/distancia_normal"
-            android:inputType="textPostalAddress"
+            android:layout_marginTop="@dimen/distancia_minima"
             android:gravity="center"
-            android:hint="Dirección"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="241dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="32dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            android:hint="Dirección"
+            android:inputType="textPostalAddress" />
 
         <Button
-            android:id="@+id/btnregistrar"
+            android:id="@+id/btnRegistrar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Registrar" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimencion_maxima"
+            android:text="Registrarse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tie_confirmarContra"
+            app:layout_constraintVertical_bias="0.0" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
