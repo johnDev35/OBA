@@ -13,7 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity"
+=======
+            android:name=".RegistrarPersonaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListarPersonasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModuloPersonas"
+            android:exported="false" />
+        <activity
+            android:name=".ModuloAdministrador"
+>>>>>>> mariana
             android:exported="false" />
         <activity
             android:name=".AssistantActivity"
