@@ -28,7 +28,7 @@
         android:layout_toRightOf="@id/imgCategory"
         android:gravity="center"
         android:text="Category of products sold"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
 
 </RelativeLayout>
