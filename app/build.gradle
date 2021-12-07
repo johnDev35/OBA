@@ -7,10 +7,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'  // Goog le Services plugin
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> manuel
 android {
     compileSdk 31
 
