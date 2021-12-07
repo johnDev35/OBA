@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-=======
         <entry key="..\:/UNAB/OBA/app/src/main/res/layout/activity_assistant.xml" value="0.15896739130434784" />
         <entry key="..\:/UNAB/OBA/app/src/main/res/layout/activity_historico.xml" value="0.15896739130434784" />
         <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable-anydpi/ic_barcode.xml" value="0.1125" />
@@ -32,7 +30,6 @@
         <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/child_rv_item_marketplace.xml" value="0.1" />
         <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/fragment_products.xml" value="0.22" />
         <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/parent_rv_item_marketplace.xml" value="0.1" />
->>>>>>> mariana
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/drawable-anydpi/ic_barcode.xml" value="0.22736486486486487" />
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/drawable-anydpi/ic_checkout.xml" value="0.2483108108108108" />
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/drawable/boton_deshabilitado.xml" value="0.2431438127090301" />
