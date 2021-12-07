@@ -32,7 +32,7 @@ import java.util.Map;
 
 import model.Cart;
 
-public class FragmentCart extends Fragment implements View.OnClickListener {
+public class FragmentCart extends Fragment implements View.OnClickListener, RVAdapterCart.RVChangeListener {
 
     RecyclerView rVCartList;
     RecyclerView.LayoutManager cartListLayoutManager;
@@ -84,7 +84,7 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
         // Recycler View
         rVCartList = view.findViewById(R.id.RVCartList);
         // Instanciar el adaptador del recycler view
-        RVAdapterCart rVAdapterCart = new RVAdapterCart(getContext());
+        RVAdapterCart rVAdapterCart = new RVAdapterCart(getContext(), this);
         rVAdapterCart.setCartProducts(cartItems);
 
         rVCartList.setAdapter(rVAdapterCart);
@@ -125,13 +125,13 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
         if(currentUser != null){
             CollectionReference collectionReference = dbClient.collection("Persona/" + currentUser.getUid() + "/Compras/");
 
-            Map<String, String> resumenCompra = new HashMap<String, String>();
+            Map<String, Integer> resumenCompra = new HashMap<String, Integer>();
 
-            resumenCompra.put("Total Compra", "150000");
-            resumenCompra.put("Total productos", "20");
+            resumenCompra.put("Total Compra", totalPrice);
+            resumenCompra.put("Total productos", numItems);
             for (Cart cart: cartItems){
                 collectionReference.document(currentDateTime + "/Productos/" + cart.getProducto().getCodigo())
-                        .set(cart.getProducto())
+                        .set(cart)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -158,11 +158,12 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
 
     }
 
-    public void setTotalPrice(int totalPrice){
-        this.totalPrice = totalPrice;
-    }
+    @Override
+    public void applyChanges(int numProducts, int priceProducts) {
+        numItems = numProducts;
+        totalPrice = priceProducts;
+        edTxtNumProducts.setText("" + numItems);
+        edTxtPrice.setText(""+totalPrice);
 
-    public void setNumItems(int numItems){
-        this.numItems = numItems;
     }
 }
