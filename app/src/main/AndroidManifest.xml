@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
         <activity
-<<<<<<< HEAD
             android:name=".MainActivity"
-=======
+              android:exported="false" />
+        <activity
             android:name=".RegistrarPersonaActivity"
             android:exported="false" />
         <activity
@@ -26,7 +26,6 @@
             android:exported="false" />
         <activity
             android:name=".ModuloAdministrador"
->>>>>>> mariana
             android:exported="false" />
         <activity
             android:name=".AssistantActivity"
