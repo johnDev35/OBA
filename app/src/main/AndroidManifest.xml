@@ -14,7 +14,7 @@
         android:theme="@style/Theme.OBA">
         <activity
             android:name=".MainActivity"
-              android:exported="false" />
+            android:exported="false" />
         <activity
             android:name=".RegistrarPersonaActivity"
             android:exported="false" />

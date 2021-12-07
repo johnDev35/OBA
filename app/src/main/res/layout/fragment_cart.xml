@@ -1,130 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentCart">
 
     <TextView
         android:id="@+id/txtCartTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Productos en el carrito"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:text="Productos en el carrito"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSearchProducts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnSearchProducts" />
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSearchProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+
+        app:fabCustomSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Buscar productos para adicionar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVCartList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtCartTitle"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="25dp"/>
-
+        app:layout_constraintVertical_bias="0.0" />
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="15dp"
-        android:backgroundTint="#E3E3E3"
+        android:backgroundTint="#CCCBCB"
         android:elevation="30dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/txtNumProducts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total productos"
+                android:layout_marginTop="15dp"
+                android:text="Total productos: "
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/txtPrice"
+                app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
 
             <EditText
                 android:id="@+id/edTxtNumProducts"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:hint="Num productos"
                 android:inputType="number"
                 android:textAlignment="textEnd"
-                android:textSize="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNumProducts" />
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/txtNumProducts"
+                app:layout_constraintTop_toBottomOf="@+id/edTxtPrice" />
 
             <TextView
                 android:id="@+id/txtPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Precio total"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="Su cuenta va en: "
+                android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edTxtNumProducts" />
+                app:layout_constraintStart_toEndOf="@+id/btnBack"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/edTxtPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
                 android:autofillHints="Total Price"
                 android:hint="Precio Total"
-                android:textSize="12dp"
                 android:inputType="number"
                 android:textAlignment="textEnd"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/txtPrice"
+                app:layout_constraintEnd_toEndOf="@+id/edTxtNumProducts"
+                app:layout_constraintStart_toEndOf="@+id/txtPrice" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="Back"
+                app:fabCustomSize="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtPrice" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:maxImageSize="20dp" />
 
-            <Button
-                android:id="@+id/btnOkEditCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Aceptar"
-                android:layout_marginStart="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/btnCancelEditCart"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnSaveCart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="-10dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="Save cart to database"
+                app:fabCustomSize="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edTxtPrice" />
-
-            <Button
-                android:id="@+id/btnCancelEditCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:text="Cancelar"
-                app:layout_constraintStart_toEndOf="@+id/btnOkEditCart"
-                app:layout_constraintTop_toTopOf="@+id/btnOkEditCart" />
-
+                app:layout_constraintTop_toBottomOf="@+id/btnBack"
+                app:maxImageSize="20dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.cardview.widget.CardView>
 
