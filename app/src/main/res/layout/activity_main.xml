@@ -5,96 +5,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondoinicio"
+    android:padding="@dimen/distancia_normal"
     tools:context=".MainActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddToCart3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="40dp"
-        android:contentDescription="Añadir producto"
-        android:src="@drawable/ic_checkout"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddToCart5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:contentDescription="Productos"
-        android:src="@drawable/ic_checkout"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAddToCart4"
-        app:layout_constraintStart_toEndOf="@+id/btnAddToCart4"
-        app:layout_constraintTop_toTopOf="@+id/btnAddToCart4" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddToCart6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:contentDescription="Productos"
-        android:src="@drawable/ic_checkout"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAddToCart5"
-        app:layout_constraintStart_toEndOf="@+id/btnAddToCart5"
-        app:layout_constraintTop_toTopOf="@+id/btnAddToCart5"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddToCart7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:contentDescription="Productos"
-        android:src="@drawable/ic_checkout"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAddToCart6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnAddToCart6"
-        app:layout_constraintTop_toTopOf="@+id/btnAddToCart6"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddToCart4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:contentDescription="Productos"
-        android:src="@drawable/ic_checkout"
-        app:backgroundTint="#E3E0E0"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAddToCart3"
-        app:layout_constraintStart_toEndOf="@+id/btnAddToCart3"
-        app:layout_constraintTop_toTopOf="@+id/btnAddToCart3" />
-
-    <Button
-        android:id="@+id/btnMarketplace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:onClick="marketPlace"
-        android:text="Marketplace"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddToCart5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textBienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="OBA"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#D1CDCD"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Bienvenido"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/distancia_minima"
+        android:text="(OBA)"
+        android:textColor="@color/purple_700"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNombre"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="Online Buyer Assistant"
+        android:textColor="@color/purple_700"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textBienvenida" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_menuInferior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnCarrito"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:contentDescription="Añadir producto"
+                android:src="@drawable/ic_carrito"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnTienda"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="MarketPlaces"
+                android:src="@drawable/ic_tienda"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnHistorico"
+                android:layout_width="50dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Historico"
+                android:src="@drawable/ic_historico"
+                app:backgroundTint="#571B1B" />
+
+            <ImageView
+                android:id="@+id/btnChat"
+                android:layout_width="45dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Chat"
+                android:src="@drawable/ic_chat"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnComprar"
+                android:layout_width="53dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Productos"
+                android:src="@drawable/ic_comprar"
+                app:backgroundTint="#E3E0E0" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

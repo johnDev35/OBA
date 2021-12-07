@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class Brand {
     String brand;
+<<<<<<< HEAD
     ArrayList<Product> products = new ArrayList<>();
+=======
+            ArrayList<String> productos= new ArrayList<>();
+>>>>>>> main
 
 
     public Brand() {

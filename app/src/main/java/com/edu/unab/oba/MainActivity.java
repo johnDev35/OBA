@@ -1,47 +1,31 @@
 package com.edu.unab.oba;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btnMarketplace;
 
+<<<<<<< HEAD
     // Authentication for Firebase
     FirebaseAuth firebaseAuth;
     GoogleSignInClient mGoogleSignInClient;
 
     private static final String TAG = "Login with Google";
+=======
+    private ImageView btnHistorico,btnTienda,btnCarrito,btnChat;
+
+>>>>>>> main
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -60,6 +44,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Botón para ir al marketplace
         btnMarketplace = findViewById(R.id.btnMarketplace);
         btnMarketplace.setOnClickListener(this);
+=======
+        btnHistorico = findViewById(R.id.btnHistorico);
+        btnTienda = findViewById(R.id.btnTienda);
+        btnCarrito = findViewById(R.id.btnCarrito);
+        btnChat = findViewById(R.id.btnChat);
+
+        btnTienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MarketplaceActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnHistorico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, historico.class);
+                startActivity(intent);
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AssistantActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ModuloAdministrador.class);
+                startActivity(intent);
+            }
+        });
+
+>>>>>>> main
     }
 
     public void onLoggedIn(String usuario){
@@ -69,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+<<<<<<< HEAD
         switch (v.getId()){
             case R.id.btnMarketplace:
                 Intent intMarketplace = new Intent(this, MarketplaceActivity.class);
@@ -103,27 +126,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+=======
+>>>>>>> main
     }
-    // [END auth_with_google]
 
-    // Google sign in
-    ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK){
-                        Intent data = result.getData();
-                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                        try {
-                            // Google Sign In was successful, authenticate with Firebase
-                            GoogleSignInAccount account = task.getResult(ApiException.class);
-                            Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-                            firebaseAuthWithGoogle(account.getIdToken());
-                        } catch (ApiException e) {
-                            // Google Sign In failed, update UI appropriately
-                            Log.w(TAG, "Google sign in failed", e);
-                        }
-                    }
-                }
-            });
 }

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.edu.unab.oba">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,14 +13,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
         <activity
+            android:name=".MainActivity"
+              android:exported="false" />
+        <activity
+            android:name=".RegistrarPersonaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListarPersonasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModuloPersonas"
+            android:exported="false" />
+        <activity
+            android:name=".ModuloAdministrador"
+            android:exported="false" />
+        <activity
+            android:name=".AssistantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.RegistroUsuarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.RecuperarContraActivity"
+            android:exported="false" />
+        <activity
             android:name=".historico"
             android:exported="false" />
         <activity
             android:name=".MarketplaceActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".vistas.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -11,6 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.edu.unab.oba.FragmentBudget;
+import com.edu.unab.oba.FragmentCart;
+import com.edu.unab.oba.FragmentScanBarCode;
+import com.edu.unab.oba.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
