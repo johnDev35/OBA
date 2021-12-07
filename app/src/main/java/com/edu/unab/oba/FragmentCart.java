@@ -123,7 +123,7 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
         }
 
         if(currentUser != null){
-            CollectionReference collectionReference = dbClient.collection("users/" + currentUser.getUid() + "/Compras/");
+            CollectionReference collectionReference = dbClient.collection("Persona/" + currentUser.getUid() + "/Compras/");
 
             Map<String, String> resumenCompra = new HashMap<String, String>();
 
