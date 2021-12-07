@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,9 +18,12 @@ import java.util.ArrayList;
 
 import model.Cart;
 
-public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHolder> implements View.OnClickListener {
+public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHolder> {
     ArrayList <Cart> cartProducts= new ArrayList<>();
+    RVChangeListener rvChangeListener;
+
     Context context;
+    int numProducts = 0, totalValue = 0;
 
     public RVAdapterCart(Context context) {
         this.context = context;
@@ -40,7 +42,7 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Cart currentCartProduct = cartProducts.get(position);
+        Cart currentCartProduct = cartProducts.get(holder.getAbsoluteAdapterPosition());
 
         Picasso.get().load(currentCartProduct.getProducto().getImagen())
                 .placeholder(R.drawable.no_products)
@@ -51,25 +53,66 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
         holder.edTxtTotalPrice.setText("" + currentCartProduct.getValorItem());
         holder.txtProductNameInCart.setText(currentCartProduct.getProducto().getNombre());
 
-        holder.btnAddItems.setOnClickListener(this);
-        holder.btnRemoveItems.setOnClickListener(this);
-        holder.btnDeleteProduct.setOnClickListener(this);
+        holder.btnAddItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = currentCartProduct.getCantidad();
+                int unitPrice = currentCartProduct.getProducto().getPrecio();
+
+                numProducts +=1;
+                totalValue += unitPrice;
+                quantity ++;
+                int price = unitPrice * quantity;
+
+                currentCartProduct.setCantidad(quantity);
+                currentCartProduct.setValorItem(price);
+
+                updateMarketplace();
+                notifyItemChanged(holder.getAbsoluteAdapterPosition());
+            }
+        });
+        holder.btnRemoveItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = currentCartProduct.getCantidad();
+                int unitPrice = currentCartProduct.getProducto().getPrecio();
+
+                if(quantity>0){
+                    numProducts --;
+                    totalValue -= unitPrice;
+                    quantity --;
+                    int price = unitPrice * quantity;
+
+                    currentCartProduct.setCantidad(quantity);
+                    currentCartProduct.setValorItem(price);
+                    updateMarketplace();
+                    notifyItemChanged(holder.getAbsoluteAdapterPosition());
+                }
+            }
+        });
+        holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = currentCartProduct.getCantidad();
+                int price = currentCartProduct.getValorItem();
+                numProducts -= quantity;
+                totalValue -= price;
+                cartProducts.remove(currentCartProduct);
+                updateMarketplace();
+                notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+            }
+        });
+
+
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnAddItems:
-                break;
-            case R.id.btnRemoveItems:
-                break;
-            case R.id.btnDeleteProduct:
-                break;
-            default:
-                break;
-        }
+    private void updateMarketplace(){
+        ((MarketplaceActivity) context).updateCart(cartProducts);
+        ((MarketplaceActivity) context).updatePrice(totalValue);
+        ((MarketplaceActivity) context).updateQuantity(numProducts);
     }
+
 
     @Override
     public int getItemCount() {
@@ -78,6 +121,13 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
 
     public void setCartProducts(ArrayList<Cart> cartProducts) {
         this.cartProducts = cartProducts;
+        numProducts = 0;
+        totalValue = 0;
+        for(Cart cart: cartProducts){
+            numProducts += cart.getCantidad();
+            totalValue += cart.getValorItem();
+        }
+
         notifyDataSetChanged();
     }
 
@@ -98,5 +148,9 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
             btnRemoveItems = itemView.findViewById(R.id.btnRemoveItems);
             btnDeleteProduct = itemView.findViewById(R.id.btnDeleteProduct);
         }
+    }
+
+    public interface RVChangeListener{
+        void applyChanges();
     }
 }

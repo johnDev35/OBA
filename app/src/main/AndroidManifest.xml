@@ -14,7 +14,11 @@
         android:theme="@style/Theme.OBA">
         <activity
             android:name=".MainActivity"
+<<<<<<< HEAD
             android:exported="false" />
+=======
+              android:exported="false" />
+>>>>>>> manuel
         <activity
             android:name=".RegistrarPersonaActivity"
             android:exported="false" />

@@ -11,22 +11,89 @@
         android:id="@+id/fragmentContainerViewMarketPlace"
         android:name="com.edu.unab.oba.FragmentProducts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_menuInferior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp">
+
+            <ImageView
+                android:id="@+id/btnCarrito"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:contentDescription="Añadir producto"
+                android:src="@drawable/ic_carrito"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnTienda"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="MarketPlaces"
+                android:src="@drawable/ic_tienda"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnHistorico"
+                android:layout_width="50dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Historico"
+                android:src="@drawable/ic_historico"
+                app:backgroundTint="#571B1B" />
+
+            <ImageView
+                android:id="@+id/btnChat"
+                android:layout_width="45dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Chat"
+                android:src="@drawable/ic_chat"
+                app:backgroundTint="#E3E0E0" />
+
+            <ImageView
+                android:id="@+id/btnComprar"
+                android:layout_width="53dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Productos"
+                android:src="@drawable/ic_comprar"
+                app:backgroundTint="#E3E0E0" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnShowMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="#D8D7D7"
         android:contentDescription="Mostrar acciones"
         android:src="@drawable/ic_more"
         android:tint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerViewMarketPlace"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -66,12 +133,12 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:background="@drawable/badge_background"
+        android:elevation="10dp"
         android:padding="3dp"
         android:text="0"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="10sp"
-        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="@+id/btnCheckout"
         app:layout_constraintTop_toTopOf="@+id/btnCheckout" />
 
