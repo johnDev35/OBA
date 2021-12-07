@@ -2,14 +2,11 @@ plugins {
     id 'com.android.application'
 }
 
-<<<<<<< HEAD
-=======
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'  // Goog le Services plugin
 
 
-
->>>>>>> mariana
 android {
     compileSdk 31
 
@@ -65,10 +62,3 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
-<<<<<<< HEAD
-apply plugin: 'com.google.gms.google-services'  // Google Services plugin
-=======
-
-}
-
->>>>>>> mariana
