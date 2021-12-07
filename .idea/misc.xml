@@ -5,6 +5,31 @@
       <map>
         <entry key="..\:/UNAB/OBA/app/src/main/res/layout/activity_assistant.xml" value="0.15896739130434784" />
         <entry key="..\:/UNAB/OBA/app/src/main/res/layout/activity_historico.xml" value="0.15896739130434784" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable-anydpi/ic_barcode.xml" value="0.1125" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable-anydpi/ic_check.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable-anydpi/ic_create.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable-anydpi/ic_person.xml" value="0.2203125" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/badge_background.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/btnformu.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/ic_add_to_cart.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/ic_checkout.xml" value="0.565625" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/ic_historico.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/drawable/ic_remove_item.xml" value="0.2203125" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_listar_personas.xml" value="0.22" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_main.xml" value="0.1802536231884058" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_marketplace.xml" value="0.1802536231884058" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_modulo_administrador.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_modulo_personas.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_personas.xml" value="0.5" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_registrar_persona.xml" value="0.22" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_registrar_usuario.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/activity_registroproducto.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/category_spinner_marketplace.xml" value="0.22" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/child_rv_item_marketplace.xml" value="0.1" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/fragment_products.xml" value="0.22" />
+        <entry key="..\:/Users/USER LENOVO/Documents/Estudios/CursoMinTicUNAB/Ciclo4/Proyecto/ProyectoOBA/OBA/app/src/main/res/layout/parent_rv_item_marketplace.xml" value="0.1" />
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/drawable-anydpi/ic_barcode.xml" value="0.22736486486486487" />
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/johnm/Documents/GitHub/OBA/app/src/main/res/layout/activity_marketplace.xml" value="0.28532608695652173" />

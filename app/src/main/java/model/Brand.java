@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Brand {
     String brand;
-    ArrayList<String> productos= new ArrayList<>();
+            ArrayList<String> productos= new ArrayList<>();
 
     public Brand(String brand) {
         this.brand = brand;

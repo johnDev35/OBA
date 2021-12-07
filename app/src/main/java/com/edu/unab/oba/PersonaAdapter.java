@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ public class PersonaAdapter extends FirestoreRecyclerAdapter<Persona, PersonaAda
         super(options);
     }
 
+
+
     @Override
     protected void onBindViewHolder(@NonNull PersonaVH holder, int position, @NonNull Persona pers) {
         DocumentSnapshot personaId = getSnapshots().getSnapshot(holder.getAdapterPosition());
@@ -40,6 +43,7 @@ public class PersonaAdapter extends FirestoreRecyclerAdapter<Persona, PersonaAda
             @Override
             public void onClick(View view) {
                 //editar();
+
             }
         });
 
@@ -63,7 +67,8 @@ public class PersonaAdapter extends FirestoreRecyclerAdapter<Persona, PersonaAda
 
     public class PersonaVH extends RecyclerView.ViewHolder {
         private TextView lnomUsu, lnombre, lapellido, lcelular, lemail, ldireccion, lperfil;
-        private Button  btnBorrar, btnModificar;
+        //private Button btnBorrar, btnModificar;
+        private ImageButton btnBorrar, btnModificar;
 
         public PersonaVH(@NonNull View itemView) {
             super(itemView);

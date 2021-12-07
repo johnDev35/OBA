@@ -113,6 +113,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        btnCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ModuloAdministrador.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

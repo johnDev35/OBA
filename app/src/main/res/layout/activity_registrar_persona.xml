@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoinicio"
     tools:context=".RegistrarPersonaActivity">
 
     <LinearLayout
@@ -33,95 +34,73 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtusuario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Usuario"
-                    android:textSize="18sp" />
-
                 <EditText
                     android:id="@+id/usuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Usuario"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/distancia_normal"
+                    android:textColorHint="#A4B5B4"
                     android:inputType="textPersonName" />
-
-                <TextView
-                    android:id="@+id/txtnombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre"
-                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Nombre"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/distancia_normal"
+                    android:textColorHint="#A4B5B4"
                     android:inputType="textPersonName" />
-
-                <TextView
-                    android:id="@+id/txtapellido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Apellido"
-                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/apellido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Apellido"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/distancia_normal"
+                    android:textColorHint="#A4B5B4"
                     android:inputType="textPersonName" />
-
-                <TextView
-                    android:id="@+id/txtcelular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Celular"
-                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/celular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Celular"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/distancia_normal"
+                    android:textColorHint="#A4B5B4"
                     android:inputType="number" />
-                <TextView
-                    android:id="@+id/txtemail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Correo Electrónico"
-                    android:textSize="18sp" />
+
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Correo Electrónico"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/distancia_normal"
+                    android:textColorHint="#A4B5B4"
                     android:inputType="textEmailAddress" />
-
-
-                <TextView
-                    android:id="@+id/txtdireccion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dirección"
-                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/direccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:hint="Dirección"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/distancia_normal"
+                    android:textColorHint="#A4B5B4"
                     android:inputType="textPostalAddress" />
-                <TextView
-                    android:id="@+id/txtclave"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contraseña"
-                    android:textSize="18sp" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,29 +110,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        android:hint="Contraseña"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/distancia_normal"
+                        android:textColorHint="#A4B5B4"
                         android:inputType="textPassword"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- <TextView
-                    android:id="@+id/txtclave2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Confirmar Contraseña"
-                    android:textSize="18sp" />
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:passwordToggleEnabled="true">
-                    <EditText
-                        android:id="@+id/clave2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPassword"/>
-                </com.google.android.material.textfield.TextInputLayout> -->
-
-
 
                 <RadioGroup
                     android:layout_width="match_parent"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoinicio"
     android:orientation="vertical"
     tools:context=".ListarPersonasActivity">
     <TextView
@@ -19,7 +20,9 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Registrar" />
+        android:drawableLeft="@drawable/ic_createperson"
+        android:text="Registrar"
+        android:backgroundTint="#2b7777"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerActivityPersona"

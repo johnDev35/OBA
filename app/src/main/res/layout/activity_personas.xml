@@ -5,6 +5,7 @@
     tools:context=".ModuloPersonas"
     android:orientation="vertical"
     android:layout_width="match_parent"
+
     android:layout_height="170dp">
 
     <LinearLayout
@@ -12,27 +13,110 @@
         android:layout_height="30dp"
         android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="5dp"
+            android:contentDescription="Usuario"
+            tools:srcCompat="@drawable/ic_person"
+            app:tint="#2b7777"/>
+
         <TextView
             android:id="@+id/lblusuario"
-            android:layout_width="206dp"
+            android:layout_width="153dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:gravity=""
             android:text="Usuario" />
 
         <TextView
-            android:id="@+id/lblperfil"
-            android:layout_width="204dp"
+            android:id="@+id/txtperfil"
+            android:layout_width="45dp"
             android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Perfil:"
+            android:textColor="#4A5959"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="25dp"/>
+
+        <TextView
+            android:id="@+id/lblperfil"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="Perfil"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="25dp" /></LinearLayout>
+            tools:layout_editor_absoluteY="25dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+
         <LinearLayout
-            android:layout_width="337dp"
+            android:layout_width="79dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:text="Nombre:"
+                android:textColor="#4A5959"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:text="Apellido:"
+                android:textColor="#4A5959"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:text="Email:"
+                android:textColor="#4A5959"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="left"
+                android:text="Dirección:"
+                android:textColor="#4A5959"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="5dp"
+                android:text="Celular:"
+                android:textColor="#4A5959"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp" />}
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="257dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -70,20 +154,31 @@
         <LinearLayout
             android:layout_width="64dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/btnmodificar1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="upd" />
-            <Button
-                android:id="@+id/btnborrar1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_marginRight="100dp">
 
-                android:text="del" />
+
+            <ImageButton
+                android:id="@+id/btnmodificar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="#2b7777"
+                android:contentDescription="Actualizar"
+                android:src="@drawable/ic_update" />
+
+            <ImageButton
+                android:id="@+id/btnborrar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_deleteperson"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:contentDescription="Eliminar"
+                android:backgroundTint="#2b7777"
+                android:layout_marginTop="1dp"/>
         </LinearLayout>
     </LinearLayout>
 

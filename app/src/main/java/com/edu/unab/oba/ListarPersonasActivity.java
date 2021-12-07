@@ -1,13 +1,13 @@
 package com.edu.unab.oba;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,13 +27,12 @@ public class ListarPersonasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_personas);
-
         recyclerView=findViewById(R.id.recyclerActivityPersona);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Query qry = firestore.collection("Persona");
-        FirestoreRecyclerOptions<Persona> fireRecyclerOpt = new FirestoreRecyclerOptions.Builder<Persona>().setQuery(qry,Persona.class).build();
-        perAdapter=new PersonaAdapter(fireRecyclerOpt);
+        FirestoreRecyclerOptions<Persona> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Persona>().setQuery(qry,Persona.class).build();
+        perAdapter=new PersonaAdapter(firestoreRecyclerOptions);
         perAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(perAdapter);
 
@@ -41,7 +40,6 @@ public class ListarPersonasActivity extends AppCompatActivity {
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intentPersonas = new Intent(ListarPersonasActivity.this, RegistrarPersonaActivity.class);
                 startActivity(intentPersonas);
 
