@@ -22,7 +22,7 @@ public class RecuperarContraControlador {
                             activity.finish();
                             Toast.makeText(activity, "Se ha enviado un correo para el cambio de contraseña", Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(activity, "Error al intentar recuperar contraseña", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Correo no registrado", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
