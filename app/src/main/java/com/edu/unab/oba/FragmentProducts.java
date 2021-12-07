@@ -97,7 +97,7 @@ public class FragmentProducts extends Fragment {
         // RECYCLER VIEW
         parentRVMarketplace = view.findViewById(R.id.parentRVProduct);
         // Adapter RV
-        parentRVAdapterMarketplace = new ParentRVAdapterMarketplace(getContext(), categories);
+        parentRVAdapterMarketplace = new ParentRVAdapterMarketplace(getContext());
 
         // Layout RV
         parentLayoutManager = new LinearLayoutManager(getContext());
@@ -258,6 +258,9 @@ public class FragmentProducts extends Fragment {
         }
     }
 
+    public void setFilterText(String text){
+        parentRVAdapterMarketplace.getFilter().filter(text);
+    }
 }
 
 

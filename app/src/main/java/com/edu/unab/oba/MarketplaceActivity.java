@@ -1,8 +1,12 @@
 package com.edu.unab.oba;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.edu.unab.oba.FragmentBudget;
-import com.edu.unab.oba.FragmentCart;
-import com.edu.unab.oba.FragmentScanBarCode;
-import com.edu.unab.oba.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -25,10 +25,11 @@ import model.Product;
 
 public class MarketplaceActivity extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton btnShowMore, btnAddToCart, btnSetBudget, btnScanCode;
+    FragmentManager fragmentManager;
     Boolean showMoreIsEnabled;
     ArrayList<Cart> cartProducts = new ArrayList<>();
     int totalPrice = 0, numItems = 0;
-    TextView txtCartItems, txtCartItemsMenu;
+    TextView txtCartItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         btnSetBudget.setOnClickListener(this);
         btnAddToCart.setOnClickListener(this);
         btnScanCode.setOnClickListener(this);
+
+        fragmentManager = getSupportFragmentManager();
     }
 
     // MENU
@@ -67,18 +70,46 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_marketplace, menu);
+        String tag = "products";
 
+        MenuItem mnuSearch = menu.findItem(R.id.mnuSearch);
+        SearchView searchView = (SearchView) mnuSearch.getActionView();
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Fragment fragment = fragmentManager.findFragmentByTag(tag);
+                ((FragmentProducts) fragment).setFilterText(newText);
+                return false;
+            }
+        });
+
+/*
         // Adicionar badge de conteo para productos en el menú para el carro de compras
         final MenuItem itmCart;
         itmCart = menu.findItem(R.id.checkout);
         View actionView = itmCart.getActionView();
         txtCartItemsMenu = actionView.findViewById(R.id.cart_badge_menu);
         updateBadge(txtCartItemsMenu);
-
+*/
         return true;
     }
 
-    private void changeButtonVisibility(){
+
+    private void changeButtonVisibility() {
         if (!showMoreIsEnabled) {
             btnAddToCart.setVisibility(View.VISIBLE);
             btnSetBudget.setVisibility(View.VISIBLE);
@@ -93,41 +124,62 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+
+        Fragment fragment = null;
+        String tag = "";
         switch (v.getId()) {
             case R.id.btnShowMore:
                 changeButtonVisibility();
                 break;
             case R.id.btnSetBudget:
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainerViewMarketPlace, FragmentBudget.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("products")
-                        .commit();
+                tag = "budget";
+                fragment = fragmentManager.findFragmentByTag(tag);
+                if (fragment == null) {
+                    fragmentManager.beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .replace(R.id.fragmentContainerViewMarketPlace,
+                                    FragmentBudget.class, null,
+                                    tag)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(tag)
+                            .commit();
+                } else fragmentManager.popBackStack(tag, 0);
                 changeButtonVisibility();
                 break;
             case R.id.btnCheckout:
-                Bundle bundleCheckout = new Bundle();
-                bundleCheckout.putParcelableArrayList("checkout", cartProducts);
-                FragmentCart fragmentCart = new FragmentCart();
-                fragmentCart.setArguments(bundleCheckout);
+                tag = "checkout";
+                fragment = fragmentManager.findFragmentByTag(tag);
+                if (fragment == null) {
+                    Bundle bundleCheckout = new Bundle();
+                    bundleCheckout.putParcelableArrayList(tag, cartProducts);
+                    FragmentCart fragmentCart = new FragmentCart();
+                    fragmentCart.setArguments(bundleCheckout);
 
-                FragmentManager fragmentManagerCheckout = getSupportFragmentManager();
-                fragmentManagerCheckout.beginTransaction()
-                        .replace(R.id.fragmentContainerViewMarketPlace, fragmentCart)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("cart")
-                        .commit();
+                    FragmentManager fragmentManagerCheckout = getSupportFragmentManager();
+                    fragmentManagerCheckout.beginTransaction()
+                            .replace(R.id.fragmentContainerViewMarketPlace, fragmentCart, tag)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(tag)
+                            .commit();
+                } else
+                    fragmentManager.popBackStack(tag, 0);
+
                 changeButtonVisibility();
                 break;
             case R.id.btnScanCode:
-                FragmentManager fragmentManagerScanCode = getSupportFragmentManager();
-                fragmentManagerScanCode.beginTransaction()
-                        .replace(R.id.fragmentContainerViewMarketPlace, FragmentScanBarCode.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("scanner")
-                        .commit();
+                tag = "scanner";
+                fragment = fragmentManager.findFragmentByTag(tag);
+                if (fragment == null) {
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerViewMarketPlace, FragmentScanBarCode.class, null, tag)
+                            .setReorderingAllowed(true)
+                            .addToBackStack(tag)
+                            .commit();
+                } else
+                    fragmentManager.popBackStack(tag, 0);
+
                 changeButtonVisibility();
+
             default:
                 break;
         }
@@ -171,27 +223,28 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
             cartProducts.add(newProduct);
         }
         updatePrice(totalPrice + priceItem);
-        updateQuantity(numItems+1);
+        updateQuantity(numItems + 1);
     }
 
-    public void updateCart(ArrayList<Cart> updatedCartProducts){
+    public void updateCart(ArrayList<Cart> updatedCartProducts) {
         this.cartProducts = updatedCartProducts;
     }
-    public void updateQuantity(int quantity){
+
+    public void updateQuantity(int quantity) {
         numItems = quantity;
         updateBadge(txtCartItems);
-        updateBadge(txtCartItemsMenu);
+        // updateBadge(txtCartItemsMenu);
     }
 
-    public void updatePrice(int price){
+    public void updatePrice(int price) {
         totalPrice = price;
     }
 
-    public int getQuantity(){
+    public int getQuantity() {
         return numItems;
     }
 
-    public int getTotalPrice(){
+    public int getTotalPrice() {
         return totalPrice;
     }
 

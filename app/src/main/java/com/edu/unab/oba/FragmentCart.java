@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -124,33 +126,33 @@ public class FragmentCart extends Fragment implements View.OnClickListener, RVAd
 
         if(currentUser != null){
             CollectionReference collectionReference = dbClient.collection("Persona/" + currentUser.getUid() + "/Compras/");
-
+            List<Task> saveTasks = new ArrayList<>();
             Map<String, Integer> resumenCompra = new HashMap<String, Integer>();
 
             resumenCompra.put("Total Compra", totalPrice);
             resumenCompra.put("Total productos", numItems);
-            for (Cart cart: cartItems){
-                collectionReference.document(currentDateTime + "/Productos/" + cart.getProducto().getCodigo())
-                        .set(cart)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            areThereProducts[0] = true;
-                        }
-                        else{
-                            Toast.makeText(getContext(), "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+            for (Cart cart: cartItems) {
+                saveTasks.add(collectionReference.document(currentDateTime + "/Productos/" + cart.getProducto().getCodigo())
+                        .set(cart));
+                areThereProducts[0] = true;
             }
 
-            if(areThereProducts[0]) {
-                collectionReference.document(currentDateTime).set(resumenCompra);
-                Toast.makeText(getContext(), "Los productos del carrito se guardaron exitosamente", Toast.LENGTH_SHORT).show();
-            }
-            else
-                Toast.makeText(getContext(), "No hay productos en el carrito", Toast.LENGTH_SHORT).show();
+            Tasks.whenAllSuccess(saveTasks).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
+                @Override
+                public void onComplete(@NonNull Task<List<Object>> task) {
+                    if(task.isSuccessful()){
+                        if(areThereProducts[0]) {
+                            collectionReference.document(currentDateTime).set(resumenCompra);
+                            Toast.makeText(getContext(), "Los productos del carrito se guardaron exitosamente", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            Toast.makeText(getContext(), "No hay productos en el carrito", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getContext(), "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
         else{
             Toast.makeText(getContext(), "Se requiere que esté activado para guardar la lista", Toast.LENGTH_SHORT).show();
