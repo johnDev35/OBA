@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OBA">
+        <activity
+            android:name=".RegistrarCategoriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModuloProductos"
+            android:exported="false" />
+        <activity
+            android:name=".ListarProductosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PictureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarProductoActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ListarProductosActivity">
+    <TextView
+        android:id="@+id/formRegistroProducto"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Módulo Productos"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:hint="Filtrar por Nombre de Producto"-->
+<!--        android:id="@+id/filtroNombre"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnRegistrarProducto"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:backgroundTint="#2b7777"
+            android:drawableLeft="@drawable/ic_create"
+            android:text="Agregar Producto"
+            tools:layout_editor_absoluteX="27dp"
+            tools:layout_editor_absoluteY="7dp" />
+
+        <Button
+            android:id="@+id/btnRegistrarCategoria"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:backgroundTint="#2b7777"
+            android:drawableLeft="@drawable/ic_create"
+            android:text="Crear categoría"
+            tools:layout_editor_absoluteX="220dp"
+            tools:layout_editor_absoluteY="7dp" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerActivityProductos"
+        android:layout_width="match_parent"
+        android:layout_height="548dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>
