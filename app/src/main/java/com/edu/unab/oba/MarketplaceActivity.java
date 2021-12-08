@@ -1,19 +1,23 @@
 package com.edu.unab.oba;
 
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,10 +29,13 @@ import model.Product;
 
 public class MarketplaceActivity extends AppCompatActivity implements View.OnClickListener {
     FloatingActionButton btnShowMore, btnAddToCart, btnSetBudget, btnScanCode;
+    ImageView btnTienda, btnHistorico, btnChat, btnComprar;
     FragmentManager fragmentManager;
     Boolean showMoreIsEnabled;
     ArrayList<Cart> cartProducts = new ArrayList<>();
     int totalPrice = 0, numItems = 0;
+    int budget = 0;
+    ColorStateList defaultColor;
     TextView txtCartItems;
 
     @Override
@@ -45,10 +52,19 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         txtCartItems = findViewById(R.id.cart_badge);
         updateBadge(txtCartItems);
 
+        // BOTONES NAVEGACIÓN
+        btnTienda = findViewById(R.id.btnTienda);
+        btnHistorico = findViewById(R.id.btnHistorico);
+        btnChat = findViewById(R.id.btnChat);
+        btnComprar = findViewById(R.id.btnComprar);
+
         // BOTONES FLOTANTES
         btnShowMore = findViewById(R.id.btnShowMore);
         btnAddToCart = findViewById(R.id.btnCheckout);
         btnSetBudget = findViewById(R.id.btnSetBudget);
+
+        defaultColor = btnSetBudget.getBackgroundTintList();
+
         btnScanCode = findViewById(R.id.btnScanCode);
         btnAddToCart.setVisibility(View.GONE);
         btnSetBudget.setVisibility(View.GONE);
@@ -78,8 +94,6 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View v) {
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
-
             }
         });
 
@@ -135,10 +149,14 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
                 tag = "budget";
                 fragment = fragmentManager.findFragmentByTag(tag);
                 if (fragment == null) {
+                    if(budget == 0) {
+                        budget = totalPrice;
+                    }
+                    FragmentBudget fragmentBudget = FragmentBudget.newInstance(totalPrice, budget);
                     fragmentManager.beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .replace(R.id.fragmentContainerViewMarketPlace,
-                                    FragmentBudget.class, null,
+                                    fragmentBudget,
                                     tag)
                             .setReorderingAllowed(true)
                             .addToBackStack(tag)
@@ -170,6 +188,7 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
                 tag = "scanner";
                 fragment = fragmentManager.findFragmentByTag(tag);
                 if (fragment == null) {
+                    FragmentScanBarCode fragmentScanBarCode;
                     fragmentManager.beginTransaction()
                             .replace(R.id.fragmentContainerViewMarketPlace, FragmentScanBarCode.class, null, tag)
                             .setReorderingAllowed(true)
@@ -179,8 +198,20 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
                     fragmentManager.popBackStack(tag, 0);
 
                 changeButtonVisibility();
-
-            default:
+                break;
+            case R.id.btnTienda:
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                break;
+            case R.id.btnHistorico:
+                Intent intentHistorico = new Intent(MarketplaceActivity.this, historico.class);
+                startActivity(intentHistorico);
+                break;
+            case R.id.btnChat:
+                Intent intentChat = new Intent(MarketplaceActivity.this, AssistantActivity.class);
+                startActivity(intentChat);
+                break;
+            case R.id.btnComprar:
+                Toast.makeText(MarketplaceActivity.this, "Utilidad en desarrollo...", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -206,11 +237,12 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         //Buscar si el producto está en el carro de compras si está suma uno a la cantidad
         // de lo contrario lo añade a la lista
         boolean inCart = false;
-        int priceItem = 0;
+        int priceItem = 0, unitPrice = 0;
         for (Cart cartProduct : cartProducts) {
             if (cartProduct.getProducto().getNombre().equals(producto.getNombre())) {
                 cartProduct.setCantidad(cartProduct.getCantidad() + 1);
-                priceItem = cartProduct.getProducto().getPrecio() * cartProduct.getCantidad();
+                unitPrice = cartProduct.getProducto().getPrecio();
+                priceItem = unitPrice * cartProduct.getCantidad();
                 cartProduct.setValorItem(priceItem);
                 inCart = true;
                 break;
@@ -218,11 +250,12 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         }
 
         if (!inCart) {
-            priceItem = producto.getPrecio();
+            unitPrice = producto.getPrecio();
+            priceItem = unitPrice;
             Cart newProduct = new Cart(producto, 1, priceItem);
             cartProducts.add(newProduct);
         }
-        updatePrice(totalPrice + priceItem);
+        updatePrice(totalPrice + unitPrice);
         updateQuantity(numItems + 1);
     }
 
@@ -238,6 +271,7 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
 
     public void updatePrice(int price) {
         totalPrice = price;
+        updateBudgetStyle();
     }
 
     public int getQuantity() {
@@ -248,5 +282,18 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         return totalPrice;
     }
 
+
+    public void updateBudget(int budget){
+        this.budget= budget;
+        updateBudgetStyle();
+    }
+
+    public void updateBudgetStyle(){
+        if(totalPrice>budget){
+            btnSetBudget.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        } else{
+            btnSetBudget.setBackgroundTintList(defaultColor);
+        }
+    }
 
 }

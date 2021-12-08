@@ -34,7 +34,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_marginBottom="15dp">
-
+<!--
             <ImageView
                 android:id="@+id/btnCarrito"
                 android:layout_width="38dp"
@@ -42,7 +42,7 @@
                 android:contentDescription="Añadir producto"
                 android:src="@drawable/ic_carrito"
                 app:backgroundTint="#E3E0E0" />
-
+-->
             <ImageView
                 android:id="@+id/btnTienda"
                 android:layout_width="38dp"

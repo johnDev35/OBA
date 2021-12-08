@@ -2,7 +2,6 @@ package com.edu.unab.oba;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -11,16 +10,23 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
+
+import java.util.ArrayList;
+
+import model.Category;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +38,16 @@ public class FragmentScanBarCode extends Fragment {
 
     private CodeScanner mCodeScanner;
     int REQUEST_CODE = 101;
+    Button btnNewScan, btnStopScan;
+    EditText edTxtBarCode;
+    RecyclerView rvScanProduct;
 
+
+    public static FragmentScanBarCode newInstance(ArrayList<Category> categories){
+        FragmentScanBarCode fragment = new FragmentScanBarCode();
+
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -43,33 +58,46 @@ public class FragmentScanBarCode extends Fragment {
                 container,
                 false);
 
-        CodeScannerView scannerView = root.findViewById(R.id.codeScannerProduct);
-        mCodeScanner = new CodeScanner(activity, scannerView);
+        btnNewScan = root.findViewById(R.id.btnNewScan);
+        btnNewScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCodeScanner.startPreview();
+                mCodeScanner.setAutoFocusEnabled(true);
+            }
+        });
+
+        btnStopScan = root.findViewById(R.id.btnStopScan);
+        btnStopScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCodeScanner.stopPreview();
+            }
+        });
+
+        edTxtBarCode = root.findViewById(R.id.edTxtBarCode);
+        rvScanProduct = root.findViewById(R.id.rvScanProduct);
 
         if (!checkPermissions()) {
             Toast.makeText(activity, "Permiso no concedido para acceder a la cámara", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE);
         }
+        CodeScannerView scannerView = root.findViewById(R.id.codeScannerProduct);
+        mCodeScanner = new CodeScanner(activity, scannerView);
 
+        mCodeScanner.stopPreview();
+        mCodeScanner.setAutoFocusEnabled(false);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        edTxtBarCode.setText(result.getText());
                     }
                 });
             }
         });
-
-        scannerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCodeScanner.startPreview();
-            }
-        });
-
         return root;
     }
 
@@ -84,7 +112,6 @@ public class FragmentScanBarCode extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mCodeScanner.startPreview();
     }
 
     @Override

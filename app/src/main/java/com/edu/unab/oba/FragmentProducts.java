@@ -192,18 +192,25 @@ public class FragmentProducts extends Fragment {
                             List<Task<QuerySnapshot>> taskList = task.getResult();
                             for(Object taskResult2: taskList){
                                 DocumentSnapshot document = (DocumentSnapshot) taskResult2;
-                                if(!document.getData().isEmpty()) {
-                                    Product newProduct = new Product();
-                                    newProduct.setMarca(document.getData().get("marca").toString());
-                                    newProduct.setNombre(document.getData().get("nombre").toString());
-                                    newProduct.setPrecio(Integer.parseInt(document.getData().get("precio").toString()));
-                                    newProduct.setCategoria(document.getData().get("categoria").toString());
-                                    newProduct.setUnd_medida(document.getData().get("und_medida").toString());
-                                    newProduct.setUbicacion(document.getData().get("ubicacion").toString());
-                                    newProduct.setCodigo(document.getId());
-                                    newProduct.setFormato(document.getData().get("formato").toString());
-                                    newProduct.setUrl_imagen(document.getData().get("url_imagen").toString());
-                                    loadProductForBrand(newProduct);
+                                if(document.getData() != null) { //El producto no está en la base de datos
+                                    if (!document.getData().isEmpty()) { //El producto está en la base de datos pero no tiene información
+                                        Product newProduct = new Product();
+                                        newProduct.setMarca(document.getData().get("marca").toString());
+                                        newProduct.setNombre(document.getData().get("nombre").toString());
+                                        newProduct.setPrecio(Integer.parseInt(document.getData().get("precio").toString()));
+                                        newProduct.setCategoria(document.getData().get("categoria").toString());
+                                        newProduct.setUnd_medida(document.getData().get("und_medida").toString());
+                                        newProduct.setUbicacion(document.getData().get("ubicacion").toString());
+                                        newProduct.setCodigo(document.getId());
+                                        newProduct.setFormato(document.getData().get("formato").toString());
+                                        newProduct.setUrl_imagen(document.getData().get("url_imagen").toString());
+                                        loadProductForBrand(newProduct);
+                                    }
+                                    else{
+                                        Log.d("Error Producto", "Falta información de producto: " + document.getId());
+                                    }
+                                }else{
+                                    Log.d("Error producto", "Falta producto en la base de datos: " + document.getId());
                                 }
                             }
                             spinnerAdapterMarketplace.notifyDataSetChanged();
