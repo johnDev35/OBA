@@ -25,8 +25,9 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
     Context context;
     int numProducts = 0, totalValue = 0;
 
-    public RVAdapterCart(Context context) {
+    public RVAdapterCart(Context context, RVChangeListener rvChangeListener) {
         this.context = context;
+        this.rvChangeListener = rvChangeListener;
     }
 
     @NonNull
@@ -68,6 +69,7 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
                 currentCartProduct.setValorItem(price);
 
                 updateMarketplace();
+                updateFragmentCart();
                 notifyItemChanged(holder.getAbsoluteAdapterPosition());
             }
         });
@@ -86,6 +88,7 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
                     currentCartProduct.setCantidad(quantity);
                     currentCartProduct.setValorItem(price);
                     updateMarketplace();
+                    updateFragmentCart();
                     notifyItemChanged(holder.getAbsoluteAdapterPosition());
                 }
             }
@@ -99,6 +102,7 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
                 totalValue -= price;
                 cartProducts.remove(currentCartProduct);
                 updateMarketplace();
+                updateFragmentCart();
                 notifyItemRemoved(holder.getAbsoluteAdapterPosition());
             }
         });
@@ -111,6 +115,9 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
         ((MarketplaceActivity) context).updateCart(cartProducts);
         ((MarketplaceActivity) context).updatePrice(totalValue);
         ((MarketplaceActivity) context).updateQuantity(numProducts);
+    }
+    private void updateFragmentCart(){
+        rvChangeListener.applyChanges(numProducts, totalValue);
     }
 
 
@@ -151,6 +158,6 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.CartViewHo
     }
 
     public interface RVChangeListener{
-        void applyChanges();
+        void applyChanges( int numProducts, int priceProducts);
     }
 }

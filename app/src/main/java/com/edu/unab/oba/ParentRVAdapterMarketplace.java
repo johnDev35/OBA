@@ -1,26 +1,18 @@
 package com.edu.unab.oba;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -28,14 +20,15 @@ import model.Brand;
 import model.Category;
 import model.Product;
 
-public class ParentRVAdapterMarketplace extends RecyclerView.Adapter<ParentRVAdapterMarketplace.ParentViewHolder> {
+public class ParentRVAdapterMarketplace extends RecyclerView.Adapter<ParentRVAdapterMarketplace.ParentViewHolder> implements Filterable {
 
     Context context;
     ArrayList<Category> categories = new ArrayList<>();
+    ArrayList<Category> allCategories = new ArrayList<>();
 
-    public ParentRVAdapterMarketplace(Context context, ArrayList<Category> categories) {
+    public ParentRVAdapterMarketplace(Context context) {
         this.context = context;
-        this.categories = categories;
+
     }
 
     @NonNull
@@ -95,6 +88,64 @@ public class ParentRVAdapterMarketplace extends RecyclerView.Adapter<ParentRVAda
         return itemCount;
     }
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+
+    /// Enabling search filtering for products
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList <Category> filterCategories = new ArrayList<>();
+
+            if(constraint.toString().isEmpty())
+                filterCategories.addAll(allCategories);
+            else {
+                for(Category category: allCategories) {
+                    ArrayList<Brand> filterBrands = new ArrayList<>();
+                    Boolean addCategory = false;
+                    for(Brand brand: category.getBrands()) {
+                        Boolean addBrand = false;
+                        ArrayList<Product> filterProducts = new ArrayList<>();
+                        for (Product product : brand.getProducts()) {
+                            if (product.getNombre().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                                filterProducts.add(product);
+                                addBrand = true;
+                            }
+                        }
+                        if(addBrand){
+                            Brand brandToAdd = new Brand();
+                            brandToAdd.setBrand(brand.getBrand());
+                            brandToAdd.setProducts(filterProducts);
+                            filterBrands.add(brandToAdd);
+                            addCategory= true;
+                        }
+                    }
+                    if(addCategory){
+                        Category categoryToAdd = new Category();
+                        categoryToAdd.setCategory(category.getCategory());
+                        categoryToAdd.setImgCategory(category.getImgCategory());
+                        categoryToAdd.setBrands(filterBrands);
+                        filterCategories.add(categoryToAdd);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filterCategories;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            categories.clear();
+            categories.addAll((ArrayList<Category>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public class ParentViewHolder extends RecyclerView.ViewHolder {
         TextView txtBrand;
         RecyclerView childRVMarketplace;
@@ -109,6 +160,7 @@ public class ParentRVAdapterMarketplace extends RecyclerView.Adapter<ParentRVAda
 
     public void setCategories(ArrayList<Category> categories) {
         this.categories = categories;
+        allCategories = new ArrayList<>(categories);
         notifyDataSetChanged();
     }
 

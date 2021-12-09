@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,12 +28,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import model.Cart;
 
-public class FragmentCart extends Fragment implements View.OnClickListener {
+public class FragmentCart extends Fragment implements View.OnClickListener, RVAdapterCart.RVChangeListener {
 
     RecyclerView rVCartList;
     RecyclerView.LayoutManager cartListLayoutManager;
@@ -84,7 +86,7 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
         // Recycler View
         rVCartList = view.findViewById(R.id.RVCartList);
         // Instanciar el adaptador del recycler view
-        RVAdapterCart rVAdapterCart = new RVAdapterCart(getContext());
+        RVAdapterCart rVAdapterCart = new RVAdapterCart(getContext(), this);
         rVAdapterCart.setCartProducts(cartItems);
 
         rVCartList.setAdapter(rVAdapterCart);
@@ -124,33 +126,33 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
 
         if(currentUser != null){
             CollectionReference collectionReference = dbClient.collection("Persona/" + currentUser.getUid() + "/Compras/");
+            List<Task> saveTasks = new ArrayList<>();
+            Map<String, Integer> resumenCompra = new HashMap<String, Integer>();
 
-            Map<String, String> resumenCompra = new HashMap<String, String>();
+            resumenCompra.put("Total Compra", totalPrice);
+            resumenCompra.put("Total productos", numItems);
+            for (Cart cart: cartItems) {
+                saveTasks.add(collectionReference.document(currentDateTime + "/Productos/" + cart.getProducto().getCodigo())
+                        .set(cart));
+                areThereProducts[0] = true;
+            }
 
-            resumenCompra.put("Total Compra", "150000");
-            resumenCompra.put("Total productos", "20");
-            for (Cart cart: cartItems){
-                collectionReference.document(currentDateTime + "/Productos/" + cart.getProducto().getCodigo())
-                        .set(cart.getProducto())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            areThereProducts[0] = true;
+            Tasks.whenAllSuccess(saveTasks).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
+                @Override
+                public void onComplete(@NonNull Task<List<Object>> task) {
+                    if(task.isSuccessful()){
+                        if(areThereProducts[0]) {
+                            collectionReference.document(currentDateTime).set(resumenCompra);
+                            Toast.makeText(getContext(), "Los productos del carrito se guardaron exitosamente", Toast.LENGTH_SHORT).show();
                         }
-                        else{
-                            Toast.makeText(getContext(), "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
-                        }
+                        else
+                            Toast.makeText(getContext(), "No hay productos en el carrito", Toast.LENGTH_SHORT).show();
                     }
-                });
-            }
-
-            if(areThereProducts[0]) {
-                collectionReference.document(currentDateTime).set(resumenCompra);
-                Toast.makeText(getContext(), "Los productos del carrito se guardaron exitosamente", Toast.LENGTH_SHORT).show();
-            }
-            else
-                Toast.makeText(getContext(), "No hay productos en el carrito", Toast.LENGTH_SHORT).show();
+                    else{
+                        Toast.makeText(getContext(), "Error: " + task.getException().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
         else{
             Toast.makeText(getContext(), "Se requiere que esté activado para guardar la lista", Toast.LENGTH_SHORT).show();
@@ -158,11 +160,12 @@ public class FragmentCart extends Fragment implements View.OnClickListener {
 
     }
 
-    public void setTotalPrice(int totalPrice){
-        this.totalPrice = totalPrice;
-    }
+    @Override
+    public void applyChanges(int numProducts, int priceProducts) {
+        numItems = numProducts;
+        totalPrice = priceProducts;
+        edTxtNumProducts.setText("" + numItems);
+        edTxtPrice.setText(""+totalPrice);
 
-    public void setNumItems(int numItems){
-        this.numItems = numItems;
     }
 }

@@ -28,7 +28,7 @@ public class RegistroControlador {
                         if(task.isSuccessful()){
                             guardarUsuario(contexto, nombres, apellidos, celular, correo, dirrecion);
                         }else {
-                            Toast.makeText(contexto, "Error al intentar registrar usuario", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(contexto, "Error al intentar registrar usuario" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
 
                     }

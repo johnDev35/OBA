@@ -10,26 +10,12 @@
         android:id="@+id/txtCartTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:text="Productos en el carrito"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSearchProducts"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnSearchProducts" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnSearchProducts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-
-        app:fabCustomSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Buscar productos para adicionar"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVCartList"
@@ -68,29 +54,6 @@
             android:layout_marginBottom="5dp">
 
             <TextView
-                android:id="@+id/txtNumProducts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Total productos: "
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/txtPrice"
-                app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
-
-            <EditText
-                android:id="@+id/edTxtNumProducts"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:hint="Num productos"
-                android:inputType="number"
-                android:textAlignment="textEnd"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/txtNumProducts"
-                app:layout_constraintTop_toBottomOf="@+id/edTxtPrice" />
-
-            <TextView
                 android:id="@+id/txtPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -104,18 +67,45 @@
 
             <EditText
                 android:id="@+id/edTxtPrice"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
                 android:autofillHints="Total Price"
                 android:hint="Precio Total"
                 android:inputType="number"
                 android:textAlignment="textEnd"
                 android:textSize="12sp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/txtPrice"
-                app:layout_constraintEnd_toEndOf="@+id/edTxtNumProducts"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtPrice" />
+
+            <TextView
+                android:id="@+id/txtNumProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Total productos: "
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/txtPrice"
+                app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
+
+            <EditText
+                android:id="@+id/edTxtNumProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:hint="Num productos"
+                android:inputType="number"
+                android:minWidth="50dp"
+                android:textAlignment="textEnd"
+                android:textSize="12sp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtNumProducts"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtNumProducts"
+                app:layout_constraintTop_toBottomOf="@+id/edTxtPrice" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnBack"
@@ -123,6 +113,7 @@
                 android:layout_height="30dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="Back"
+                android:src="@drawable/ic_back"
                 app:fabCustomSize="30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -134,6 +125,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="-10dp"
                 android:adjustViewBounds="true"
+                android:src="@drawable/ic_save_cart"
                 android:contentDescription="Save cart to database"
                 app:fabCustomSize="30dp"
                 app:layout_constraintStart_toStartOf="parent"
