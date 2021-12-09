@@ -58,6 +58,11 @@ public class MarketplaceActivity extends AppCompatActivity implements View.OnCli
         btnChat = findViewById(R.id.btnChat);
         btnComprar = findViewById(R.id.btnComprar);
 
+        btnTienda.setOnClickListener(this);
+        btnHistorico.setOnClickListener(this);
+        btnChat.setOnClickListener(this);
+        btnComprar.setOnClickListener(this);
+
         // BOTONES FLOTANTES
         btnShowMore = findViewById(R.id.btnShowMore);
         btnAddToCart = findViewById(R.id.btnCheckout);
