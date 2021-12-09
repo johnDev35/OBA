@@ -48,11 +48,11 @@
             android:layout_height="wrap_content"
             android:text="Módulo Productos" />
 
-        <Button
-            android:id="@+id/btnPersonasRegistrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrar Personas" />
+<!--        <Button-->
+<!--            android:id="@+id/btnRegistrarPrueba"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Registrar Productos" />-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

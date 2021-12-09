@@ -9,7 +9,6 @@ import android.widget.Button;
 
 public class ModuloAdministrador extends AppCompatActivity {
 
-
     private Button btnPersonas, btnProductos, btn1;
 
     @Override
@@ -18,32 +17,9 @@ public class ModuloAdministrador extends AppCompatActivity {
         setContentView(R.layout.activity_modulo_administrador);
 
         btnPersonas = findViewById(R.id.btnPersonas);
-        btn1= findViewById(R.id.btnPersonasRegistrar);
         btnProductos = findViewById(R.id.btnProductos);
+        //btn1= findViewById(R.id.btnRegistrarPrueba);
 
-        btnProductos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent intentProductos = new Intent(MainActivity.this, RegistrarProductoActivity.class);
-                //startActivity(intentProductos);
-            }
-        });
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Intent intentPersonas = new Intent(MainActivity.this, RegistrarPersonaActivity.class);
-                //startActivity(intentPersonas);
-            }
-        });
-
-        /*btnPersonas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentPersonas = new Intent(ModuloAdministrador.this, ModuloPersonas.class);
-                startActivity(intentPersonas);
-            }
-        });*/
         btnPersonas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,5 +28,20 @@ public class ModuloAdministrador extends AppCompatActivity {
             }
         });
 
+        btnProductos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentProductos = new Intent(ModuloAdministrador.this, ListarProductosActivity.class);
+                startActivity(intentProductos);
+            }
+        });
+
+//        btn1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentPersonas = new Intent(ModuloAdministrador.this, RegistrarProductoActivity.class);
+//                startActivity(intentPersonas);
+//            }
+//        });
     }
 }
